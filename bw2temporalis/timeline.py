@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+from __future__ import print_function, unicode_literals
+from eight import *
+
 from .dynamic_ia_methods import DynamicIAMethod, dynamic_methods
 from bw2data import Method, methods
 import collections
