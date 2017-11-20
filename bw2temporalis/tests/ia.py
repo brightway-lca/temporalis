@@ -7,7 +7,6 @@ from ..utils import get_function_name
 # from bw2data import Database, Method, databases, methods
 # from bw2calc import LCA
 from bw2data.tests import BW2DataTest as BaseTestCase
-import arrow
 import numpy as np
 import warnings
 
