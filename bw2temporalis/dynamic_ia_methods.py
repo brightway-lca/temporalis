@@ -95,6 +95,7 @@ Args:
             if isinstance(value, str):
                 # Backwards compatibility
                 if '%s' in value:
+                    warnings.simplefilter('always', DeprecationWarning) #otherwise not warning and fail to pass test
                     warnings.warn(
                         "Functions can now be normal Python code; please change def %s() to def some_name().",
                         DeprecationWarning
