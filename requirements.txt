@@ -7,7 +7,6 @@ colorama
 eight
 nose
 numpy>=1.6
-progressbar-ipython
 scipy
 stats_arrays>=0.2.2
 voluptuous

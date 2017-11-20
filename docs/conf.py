@@ -26,6 +26,33 @@ from os.path import abspath, dirname
 # Make sure we use this copy of Brightway2
 sys.path.insert(1, abspath(dirname(dirname(__file__))))
 
+
+
+# Mock out numpy, scipy and scikit-image for building the docs on readthedocs.
+# http://read-the-docs.readthedocs.org/en/latest/faq.html#i-get-import-errors-on-libraries-that-depend-on-c-modules
+try:
+    from unittest.mock import MagicMock
+except ImportError:
+    from mock import Mock as MagicMock
+
+class Mock(MagicMock):
+    @classmethod
+    def __getattr__(cls, name):
+        if name == "_mock_methods":
+            return name._mock_methods
+        else:
+            return Mock()
+        #~return Mock()
+
+MOCK_MODULES = [
+    'numpy',
+    'scipy',
+    'pandas',
+    'bw2speedups',
+]
+sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
+
+
 # -- General configuration -----------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
