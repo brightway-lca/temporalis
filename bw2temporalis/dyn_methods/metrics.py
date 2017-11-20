@@ -149,7 +149,8 @@ class _AtmosphericDecay(object):
 
         """
         return np.exp(-times / self.LIFETIMES[gas])
-
+    
+    @staticmethod
     def methane_to_co2(times,tau=12.4 ,alpha=0.51):
         """As methane decays some fraction (alpha) is converted to CO2.The convolution 
         with the methane emission profile gives the CO2 emission profile.
@@ -171,9 +172,11 @@ class _AtmosphericDecay(object):
 
 AtmosphericDecay = _AtmosphericDecay()
 
-
+#TODO rework all here
 class _RadiativeForcing(object):
-    def __call__(self, gas, emissions, emission_times, time_step='Y', cutoff=100):
+    #~def __call__(self, gas, emissions, emission_times, time_step='Y', cutoff=100): #without decay rate and year
+    def __call__(self, gas, emissions, emission_times, time_step='Y', cutoff=100,rot_land=100,bio_co2_decay="delta",bio_land_co2_emis_yr=np.array([0])): #with decay rate and year
+
         """Calculate the radiative forcing due to pulse emissions of `gas`.
 
         `emissions` is a 1D numpy array of emission amounts.
@@ -185,7 +188,11 @@ class _RadiativeForcing(object):
 
         `emission_times` do not have to be regularly spaced.
         
-        `time_step` must be a `numpy datetime unit <https://docs.scipy.org/doc/numpy/reference/arrays.datetime.html#datetime-units>`_ 
+        `time_step` must be a `numpy datetime unit <https://docs.scipy.org/doc/numpy/reference/arrays.datetime.html#datetime-units>`
+         
+        `bio_co2_decay` emission profile of biogenic carbon
+        `bio_land_co2_emis_yr` is the year when the biogenic carbon is emitted, by default at yr=0 
+        `rot_land` rotation lenght biogenic carbon from stand
 
         """
         
@@ -201,15 +208,46 @@ class _RadiativeForcing(object):
         if gas == "ch4_fossil":
             return self.fossil_ch4(emissions, emission_times, time_step, cutoff)
 
-        elif gas == "co2_biogenic":     
+        #TODO implement landscape approach
+        elif gas == "co2_biogenic":  
+            #assert np.count_nonzero(emissions)==1, "biogenic C is characterized only for stands i.e. single pulse over the time_horizon considered"            
             emission_RE_td = TemporalDistribution(
                 emission_times,
                 emissions * RADIATIVE_EFFICIENCIES['co2']
             )
-            decay_td = TemporalDistribution(
-                times_TD,
-                co2bio_stand_decay(cutoff=cutoff,tstep=time_step,bio_emis_yr=emission_times)
-            )
+            #without decay rate and year
+            #~if np.count_nonzero(emissions)==1:            
+                #~decay_td = TemporalDistribution(
+                    #~times_TD,
+                    #~co2bio_stand_decay(cutoff=cutoff,tstep=time_step,bio_emis_yr=emission_times)
+                    #~)
+            #~else:
+                #~decay_td = TemporalDistribution(
+                    #~times_TD,
+                    #~co2bio_landscape_decay(cutoff=cutoff,tstep=time_step,NEP=np.absolute(emissions)) #need to pass absolute value otherwise return wrong for negative emissions
+                    #~)
+            #with decay rate and year
+            if np.count_nonzero(emissions)==1:            
+                decay_td = TemporalDistribution(
+                    times_TD,
+                    co2bio_stand_decay(cutoff=cutoff,
+                                       rot=rot_land,#
+                                       bio_decay=bio_co2_decay,#
+                                       tstep=time_step,bio_emis_yr=emission_times)
+                    )
+            else:
+                decay_td = TemporalDistribution(
+                    times_TD,
+                    co2bio_landscape_decay(cutoff=cutoff,tstep=time_step,NEP=np.absolute(emissions),#need to pass absolute value otherwise return wrong for negative emissions
+                                       bio_decay=bio_co2_decay,#
+                                       bio_emis_yr=bio_land_co2_emis_yr#
+                                          ) 
+                    )
+
+            #decay_td = TemporalDistribution(
+                #times_TD,
+                #co2bio_stand_decay(cutoff=cutoff,tstep=time_step,bio_emis_yr=emission_times)
+            #)
             return (emission_RE_td * decay_td)[:cutoff]
                         
         elif gas not in RADIATIVE_EFFICIENCIES:
@@ -305,6 +343,8 @@ def AGTP(gas, emissions, times, time_step='Y', cutoff=100, method="ar5_boucher")
 
 #TODO: recode this to deal better with timedelta
 def co2bio_stand_decay(cutoff=100,growth_sc_fact=1,tstep='Y',rot=100,NEP=None,bio_decay="delta",bio_emis_yr=np.array([0])):
+#~def co2bio_stand_decay(cutoff=100,growth_sc_fact=1,tstep='Y',rot=100,NEP=None,bio_decay="chi2",bio_emis_yr=np.array([0])): #test chi2 for paper
+
     """
     Decay curve for a unitary pulse emission of biogenic CO2 (Cherubini 2011  doi: 10.1111/j.1757-1707.2011.01102.x)
     following the single stand approch (Cherubini 2013 doi.org/10.1016/j.jenvman.2013.07.021)
@@ -330,10 +370,10 @@ def co2bio_stand_decay(cutoff=100,growth_sc_fact=1,tstep='Y',rot=100,NEP=None,bi
     #TODO; tstep works fine like this, but better rewrite methods to explicity deal with timedelta
     timestep=cutoff/(len(times_TD)-1)
     bio_emis_index=bio_emis_yr.astype('timedelta64[{}]'.format(tstep)).astype('int')[0]
-    
+    #~print(bio_emis_index)
     IRF=AtmosphericDecay('co2',times_array)
-    #only delta has been updated for now
-    assert bio_decay in {'delta'}#, 'uniform', 'exponential', 'chi2'}
+    
+    assert bio_decay in {'delta','chi2','exponential','uniform' }
     biog_emis_prof=getattr(WoodDecay, bio_decay)(emission_index=bio_emis_index,t_horizon=cutoff,tstep=timestep)
     #old
     # biog_emis_prof=getattr(WoodDecay,bio_decay)(emission_year=bio_emis_yr,t_horizon=cutoff,tstep=timestep)
@@ -350,3 +390,39 @@ def co2bio_stand_decay(cutoff=100,growth_sc_fact=1,tstep='Y',rot=100,NEP=None,bi
     decay_bio=(conv_emis-conv_gr) 
     return decay_bio 
     
+def co2bio_landscape_decay(cutoff=100,tstep='Y',NEP=None,bio_decay="delta",bio_emis_yr=np.array([0])):
+    ###TO BE FINALIZED AND CHECK
+    """
+    Decay curve for a emission profile from a landscape forest obtained convoluting the emission profile from the forest (i.e. NEP). with the IRF of CO2 convoluted with the emission profile of the oxidation rate (see bio_emis_yr and bio_decay). 
+    
+    NEP= relative Net Ecosystem Productivity profile of the landscape forest. 
+    bio_emis_yr= year when the biogenic carbon is emitted, by default at yr=0
+    bio_decay= emission profile of biogenic carbon by default delta function (all C emitted at year biog_emis_yr)
+    
+    Note: this does not include changes in land use (see Cherubini 2011 doi:10.1016/j.ecolmodel.2011.06.021, eq. 5)
+    
+    """
+    times_TD=np.arange(np.datetime64(0, 'Y'), np.datetime64(cutoff,'Y'), dtype='datetime64[{}]'.format(tstep)).astype('timedelta64[{}]'.format(tstep))
+    times_TD=np.append(times_TD,times_TD[-1]+1)
+    times_array=np.linspace(0,cutoff,len(times_TD))
+    #TODO; tstep works fine like this, but better rewrite methods to explicity deal with timedelta
+    timestep=cutoff/(len(times_TD)-1)
+    bio_emis_index=bio_emis_yr.astype('timedelta64[{}]'.format(tstep)).astype('int')[0]
+    IRF=AtmosphericDecay('co2',times_array)
+    
+    assert bio_decay in {'delta','chi2','exponential','uniform' }
+    biog_emis_prof=getattr(WoodDecay, bio_decay)(emission_index=bio_emis_index,t_horizon=cutoff,tstep=timestep)
+    
+    #calculate decay profile considering emission bio_decay
+    conv_emis=np.convolve(biog_emis_prof,IRF,mode='full')[:IRF.size]
+    #calculate actual emission profile of landscape forest
+    decay_bio=np.convolve(conv_emis,NEP,mode='full')[:IRF.size]
+    return decay_bio
+    
+    
+#tis two are the same!!!
+#~# plt.plot(np.convolve(np.append(np.array(1),np.repeat(0,99))-ForestGrowth.normal_growth(tstep=1)[:100],AtmosphericDecay('co2',np.arange(0,100)))[:100]) #non sifting
+#~# 
+#~#plt.plot(AtmosphericDecay('co2',np.arange(0,100))-np.convolve(AtmosphericDecay('co2',np.arange(0,100)),ForestGrowth.normal_growth(tstep=1))[:100])#sifting
+
+#plt.plot(np.convolve(np.repeat(1,100),biorif)[:100]) #heaviside step function for landscape knowing nep of stand

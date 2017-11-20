@@ -33,7 +33,7 @@ def create_climate_methods():
             ],
     'ch4_fossil': [
         "Methane", # old fossil ch4 of ei2. bw2 maps to biosphere flow of ei3, left just in case
-        "Methane fossil",
+        "Methane, fossil",
         "Methane, from soil or biomass stock"
             ],
     'ch4': [

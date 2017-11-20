@@ -4,13 +4,14 @@ from eight import *
 
 import numpy as np
 from numexpr import evaluate
-from scipy.stats import expon
-from scipy.stats import chi2
+from scipy.stats import expon,chi2
 # from .import metrics  #to avoid prob in cyclic import of RadiativeForcing, from .metrics import RadiativeForcing does not work
 
 
 class ForestGrowth(object): 
     """Class containing  methods to estimate forest growth rate"""
+    
+    @staticmethod
     def normal_growth(rotation=100,tstep=0.1):
         """Calculate biomass growth rate (i.e C uptake) a distribution with variance = rotation/4 ,  mean = rotation/2 
         and  a carbon neutral forest (i.e. growth normalized to 1)  (Cherubini 2011  doi: 10.1111/j.1757-1707.2011.01102.x)
@@ -75,22 +76,57 @@ class ForestGrowth(object):
 
 class WoodDecay(object): 
     """Class containing methods to estimate wood decay rate"""
-    #OLD
-    # def delta(emission_year=0,t_horizon=100,tstep=.1):
-        # """calculate exponential decay
-        # """      
-        # decay=np.zeros(int( (t_horizon/tstep )+1))
-        # decay[ int( (emission_year)/tstep ) ]=1
-        # return decay
-        
+
+    @staticmethod
     def delta(emission_index=0,t_horizon=100,tstep=.1):
         """calculate delta function (i.e. punctual year emission)
         """      
         decay=np.zeros(int( (t_horizon/tstep )+1))
         decay[emission_index]=1
         return decay
+
+    @staticmethod
+    def chi2(emission_index=0,t_horizon=100,tstep=.1):
+        """
+        # use k paramater= t+2 as done in Cherubini (doi: 10.1111/j.1757-1707.2011.01156.x)
+        # """
+        yrs=np.linspace(0, t_horizon,(t_horizon/tstep+1))
+        decay=chi2.pdf(yrs,emission_index+2)
+        decay=decay*tstep
+        return decay
+
+    @staticmethod
+    def exponential(emission_index=0,t_horizon=100,tstep=.1):
+        """calculate exponential decay
+        """
+        yrs=np.linspace(0, t_horizon,(t_horizon/tstep+1))
+        decay=expon(0,emission_index or 1).pdf(yrs)
+        decay=decay*tstep
+        return decay
         
-#TODO: update them based on timedelta
+    @staticmethod
+    def uniform(emission_index=0,t_horizon=100,tstep=.1):
+        """calculate uniform decay
+        
+        ###THINK ON WHAT TO DO WHEN EMISSION AFTER TIME HORIZON (E.G. year 150 in default case)
+        ###IF EMISSION OCCUR AFTER t_horizon/2 obviously the sum of yearly emission is not =1
+        
+        """
+        decay=np.zeros(int(t_horizon/tstep)) #int to avoid np indexing warning
+        if emission_index==0:
+            decay[0]=1
+        else:
+            decay[ :(int(emission_index/tstep)) *2]=1 / ((emission_index/tstep)*2) 
+        return decay
+        
+    #~#OLD
+    #~def delta(emission_year=0,t_horizon=100,tstep=.1):
+        #~# """calculate exponential decay
+        #~# """      
+        #~decay=np.zeros(int( (t_horizon/tstep )+1))
+        #~decay[ int( (emission_year)/tstep ) ]=1
+        #~return decay
+        
     # def uniform(emission_year=0,t_horizon=100,tstep=.1):
         # """calculate uniform decay
         # 
