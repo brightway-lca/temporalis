@@ -88,7 +88,7 @@ class Timeline(object):
         return self._summer(self.characterized, cumulative, stepped)
 
 
-    def characterize_dynamic(self, method, data=None, cumulative=True, stepped=False):
+    def characterize_dynamic(self, method, data=None, cumulative=True, stepped=False,bio_st_emis_yr=None,bio_st_decay=None,rot_stand=None):
         """Characterize a Timeline object with a dynamic impact assessment method.
         Return a nested list of year and impact
         Args:
@@ -96,15 +96,29 @@ class Timeline(object):
             * *data* (Timeline object; default=None): ....
             * *cumulative* (bool; default=True): when True return cumulative impact over time.
             * *stepped* (bool; default=True):...
+            * *bio_st_emis_yr* (int; default=None): year when the biogenic carbon from stand is emitted, by default at yr=0.
+            * *bio_st_decay* (str; default=None): emission profile of biogenic carbon from stand .
+            * *rot_stand* (int; default=None): lenght of rotation of forest stands.
+
         """
         if method not in dynamic_methods:
             raise ValueError(u"LCIA dynamic method %s not found" % method)
         if data is None and not self.raw:
             raise EmptyTimeline("No data to characterize")
-        method = DynamicIAMethod(method)
-        self.method_data = method.load()
-        method_functions = method.create_functions(self.method_data)
+        meth = DynamicIAMethod(method)
+        self.method_data = meth.load()
+        #update biogenic carbon profile based on emission year and decay profile if passed
+        if any(v is not None for v in (bio_st_emis_yr,bio_st_decay,rot_stand)):                
+            self.method_data[('static_forest', 'C_biogenic')]="""def custom_co2bio_function(datetime):
+                from bw2temporalis.dyn_methods.metrics import {0}
+                from datetime import timedelta
+                import numpy as np
+                import collections
+                custom_co2bio_rf_td={0}("co2_biogenic", np.array((1.,)), np.array(({1} or 0,),dtype=('timedelta64[Y]')), 'Y', 1000,{3} or 100,'{2}' or 'delta') 
+                return_tuple = collections.namedtuple('return_tuple', ['dt', 'amount'])
+                return [return_tuple(d,v) for d,v in zip((datetime+custom_co2bio_rf_td.times.astype(timedelta)),custom_co2bio_rf_td.values)]""".format(method,bio_st_emis_yr,bio_st_decay,rot_stand)
 
+        method_functions = meth.create_functions(self.method_data)
         self.characterized = []
         self.dp_groups=self._groupby_sum_by_flow(self.raw if data is None else data)
 
