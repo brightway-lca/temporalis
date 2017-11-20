@@ -193,6 +193,13 @@ Args:
         #for all the other datasets
         else:
             #skip node if part of of a static db or when a loop i traversed loop_cutoff times
+            ###ALL THIS LEFT FOR FUTURE IMPROVEMENTS
+            # if ed in self.edges or node['database'] in self.static_databases: #this do not loop
+            # if node['database'] in self.static_databases: #this loop
+            # if node['database'] in self.static_databases or self.loops[ed]>=15: #loop certain amount of time
+            #~if (ed[1],ed[0],) in self.edges or node['database'] in self.static_databases: #this do not reloop
+            #~if node['database'] in self.static_databases or self.loops[ed]>=15: #loop certain amount of time
+            #~if node['database'] in self.static_databases or self.loops[ed]>=self.loop_cutoff_value or td.total>1: #do not remeber why did this
             if node['database'] in self.static_databases or self.loops[ed]>=self.loop_cutoff_value or (self.loops[ed]>=1 and td.total>=1): #loop certain amount of time ONLY if exc amoung <=1
                 return
 
@@ -212,7 +219,6 @@ Args:
                     #Have to be careful here, because can have
                     #multiple exchanges with same input/output
                     #Sum up multiple edges with same input, if present
-                    #~print(exc.get('name'),exc.get('input'),exc.get('system'))
                     dyn_edges[exc['input']] = (
                     self._get_temporal_distribution(exc) +
                     dyn_edges.get(exc['input'], 0))
@@ -263,10 +269,15 @@ Args:
         #check if new bw2 will need changes cause will differentiate import of products and activity (i.e. process)
         if not data.get('type', 'process') == "process":
             return
-            
+        
         #Add cumulated inventory for static database (to make faster calc) and loops (to avoid infinite loops)
+        ###ALL THIS LEFT FOR FUTURE IMPROVEMENTS
+        # if data['database'] in self.static_databases: #this loop without stoop
+        # if data['database'] in self.static_databases or edge in self.edges: #do not loop
+        #~if data['database'] in self.static_databases or (edge[1],edge[0],) in self.edges: #do not re-loop (new)
+        #~if data['database'] in self.static_databases or self.loops[edge]>=15: #loop certain amount of time
+        #~if data['database'] in self.static_databases or self.loops[edge]>=self.loop_cutoff_value or tech_td.total>1: #do not remeber why did this
         if data['database'] in self.static_databases or self.loops[edge]>=self.loop_cutoff_value or (self.loops[edge]>=1 and tech_td.total>=1): #loop certain amount of time only if exc amoung <=1
-                
             self.lca.redo_lci({data: 1})
             
             # #add product amount to product_amount (to be used when background dataset traversal will be implemented )

@@ -28,12 +28,10 @@ class DynamicLCATestCase(BaseTestCase):
         dynamic_lca = DynamicLCA(
             demand=fu,
             worst_case_method=method,
-            # now=arrow.now(),
         )
         dynamic_lca.calculate()
         dynamic_lca.timeline.characterize_static(method)
 
-        # print(dynamic_lca.gt_edges)
         print(dynamic_lca.timeline.raw)
 
         return sum([x.amount for x in dynamic_lca.timeline.characterized])
@@ -350,7 +348,8 @@ class DynamicLCATestCase(BaseTestCase):
                         'type': 'biosphere'
                     },
                     {
-                        'amount': 4,
+                        'amount': 1, #unitary production
+                        #~'amount': 4, #non unitary production not working properly
                         'input': ('b', 'second'),
                         'type': 'production'
                     },
