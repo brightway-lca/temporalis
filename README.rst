@@ -1,3 +1,12 @@
+
+.. image:: https://ci.appveyor.com/api/projects/status/aiccd0gega0v7suq/branch/default?svg=true
+	:target: https://coveralls.io/bitbucket/cardosan/brightway2-temporalis2_delete?branch=master
+	:alt: bw2temporalis appveyor build status
+
+.. image:: https://coveralls.io/repos/bitbucket/cardosan/brightway2-temporalis2_delete/badge.svg?branch=master
+	:target: https://coveralls.io/bitbucket/cardosan/brightway2-temporalis2_delete?branch=master
+    :alt: Test coverage report
+
 Brightway2 temporalis
 =====================
 

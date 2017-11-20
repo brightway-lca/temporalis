@@ -53,6 +53,8 @@ def get_static_forest_keys():
             '_Wood construction waste, 20% water on dry mass basis',
             ]
             
+    test=['co2bio_test']
+
     #dunno why this below returns skips some datasets
     #FORMIT_forest=[x['name'] for x in Database(db) if x['name'].split(',')[-1]==' NPP' for db in ['BAU0', 'BAU26', 'BAU45', 'BAU85', 'SCEN2_45', 'SCEN3_45', 'SCEN4_45', 'SCEN5_45', 'SCEN6_45']]
 
@@ -60,7 +62,7 @@ def get_static_forest_keys():
     #~for db in ['BAU0', 'BAU26', 'BAU45', 'BAU85', 'SCEN2_45', 'SCEN3_45', 'SCEN4_45', 'SCEN5_45', 'SCEN6_45','trial']:
         #~FORMIT_forest.extend([x['name'] for x in Database(db) if x['name'].split(',')[-1]==' biogenic'])
 
-    forest = set( ei_22 + ei_32_33 + estelle )# + FORMIT_forest)
+    forest = set( ei_22 + ei_32_33 + estelle + test )# + FORMIT_forest)
     projects.set_current("{}".format(projects.current)) #need to do this otherwise uses default project if imported before setting the proj
     db = Database(config.biosphere)
     
