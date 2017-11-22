@@ -68,4 +68,4 @@ def get_static_forest_keys():
     
     #search 'Carbon dioxide, in air' sequestered from processes in `forest` (empty set when biopshere not existing like in tests)
     return set() if not db else \
-           set([x.output.key for x in db.get('cc6a1abb-b123-4ca6-8f16-38209df609be').downstream_bio() if x.output['name'] in forest])
+           set([x.output.key for x in db.get('cc6a1abb-b123-4ca6-8f16-38209df609be').upstream(kinds=None) if x.output.get('name') in forest])

@@ -13,7 +13,7 @@ from bw2data.tests import BW2DataTest as BaseTestCase
 from ..dyn_methods.timedependent_lca import time_dependent_LCA
 from ..dyn_methods.method_creation import create_climate_methods
 
-from brightway2 import bw2setup
+from bw2io import bw2setup
 
 import numpy as np
 #~import warnings
