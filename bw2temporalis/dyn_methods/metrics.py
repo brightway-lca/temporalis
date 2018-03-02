@@ -1,29 +1,29 @@
 # -*- coding: utf-8 -*-
-"""
-Adapted from https://github.com/gschivley/co-fire, which is licensed:
 
-The MIT License (MIT)
+#~Adapted from https://github.com/gschivley/co-fire, which is licensed:
+#~
+#~The MIT License (MIT)
+#~
+#~Copyright (c) 2015 Greg Schively
+#~
+#~Permission is hereby granted, free of charge, to any person obtaining a copy
+#~of this software and associated documentation files (the "Software"), to deal
+#~in the Software without restriction, including without limitation the rights
+#~to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+#~copies of the Software, and to permit persons to whom the Software is
+#~furnished to do so, subject to the following conditions:
+#~
+#~The above copyright notice and this permission notice shall be included in all
+#~copies or substantial portions of the Software.
+#~
+#~THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+#~IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+#~FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+#~AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+#~LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+#~OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+#~SOFTWARE.
 
-Copyright (c) 2015 Greg Schively
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-"""
 from __future__ import print_function, unicode_literals
 from eight import *
 
@@ -32,7 +32,7 @@ import numexpr as ne
 from ..temporal_distribution import TemporalDistribution
 from .biogenic_carbon import WoodDecay,ForestGrowth
 
-#TODO: all made temporarily compatible with timedelta, but codes need cleaning, did not have time, will do after the paper draft is finished
+#TODO: all made compatible with timedelta, but codes need some cleaning
 
 #Sources # AR5-SM, p. 8SM-16,
 RADIATIVE_EFFICIENCIES = {
@@ -208,26 +208,9 @@ class _RadiativeForcing(object):
         if gas == "ch4_fossil":
             return self.fossil_ch4(emissions, emission_times, time_step, cutoff)
 
-        #TODO implement landscape approach
-        elif gas == "co2_biogenic":  
-            #assert np.count_nonzero(emissions)==1, "biogenic C is characterized only for stands i.e. single pulse over the time_horizon considered"            
-            emission_RE_td = TemporalDistribution(
-                emission_times,
-                emissions * RADIATIVE_EFFICIENCIES['co2']
-            )
-            #without decay rate and year
-            #~if np.count_nonzero(emissions)==1:            
-                #~decay_td = TemporalDistribution(
-                    #~times_TD,
-                    #~co2bio_stand_decay(cutoff=cutoff,tstep=time_step,bio_emis_yr=emission_times)
-                    #~)
-            #~else:
-                #~decay_td = TemporalDistribution(
-                    #~times_TD,
-                    #~co2bio_landscape_decay(cutoff=cutoff,tstep=time_step,NEP=np.absolute(emissions)) #need to pass absolute value otherwise return wrong for negative emissions
-                    #~)
-            #with decay rate and year
-            if np.count_nonzero(emissions)==1:            
+        elif gas == "co2_biogenic": 
+            #for stand
+            if np.count_nonzero(emissions)==1:    
                 decay_td = TemporalDistribution(
                     times_TD,
                     co2bio_stand_decay(cutoff=cutoff,
@@ -235,20 +218,18 @@ class _RadiativeForcing(object):
                                        bio_decay=bio_co2_decay,#
                                        tstep=time_step,bio_emis_yr=emission_times)
                     )
+            #for landscape forest
             else:
                 decay_td = TemporalDistribution(
                     times_TD,
-                    co2bio_landscape_decay(cutoff=cutoff,tstep=time_step,NEP=np.absolute(emissions),#need to pass absolute value otherwise return wrong for negative emissions
+                    co2bio_landscape_decay(cutoff=cutoff,tstep=time_step,
+                                       NEP=np.concatenate([np.repeat(0,len(np.arange(0,emission_times.astype('timedelta64[Y]')[0]))),emissions]),#dirty way to make this work correctly...need to rework everything to better deal with TD
                                        bio_decay=bio_co2_decay,#
                                        bio_emis_yr=bio_land_co2_emis_yr#
                                           ) 
                     )
 
-            #decay_td = TemporalDistribution(
-                #times_TD,
-                #co2bio_stand_decay(cutoff=cutoff,tstep=time_step,bio_emis_yr=emission_times)
-            #)
-            return (emission_RE_td * decay_td)[:cutoff]
+            return (decay_td * RADIATIVE_EFFICIENCIES['co2'])[:cutoff]
                         
         elif gas not in RADIATIVE_EFFICIENCIES:
             raise ValueError("Unknown gas")
@@ -370,7 +351,6 @@ def co2bio_stand_decay(cutoff=100,growth_sc_fact=1,tstep='Y',rot=100,NEP=None,bi
     #TODO; tstep works fine like this, but better rewrite methods to explicity deal with timedelta
     timestep=cutoff/(len(times_TD)-1)
     bio_emis_index=bio_emis_yr.astype('timedelta64[{}]'.format(tstep)).astype('int')[0]
-    #~print(bio_emis_index)
     IRF=AtmosphericDecay('co2',times_array)
     
     assert bio_decay in {'delta','chi2','exponential','uniform' }
@@ -391,7 +371,6 @@ def co2bio_stand_decay(cutoff=100,growth_sc_fact=1,tstep='Y',rot=100,NEP=None,bi
     return decay_bio 
     
 def co2bio_landscape_decay(cutoff=100,tstep='Y',NEP=None,bio_decay="delta",bio_emis_yr=np.array([0])):
-    ###TO BE FINALIZED AND CHECK
     """
     Decay curve for a emission profile from a landscape forest obtained convoluting the emission profile from the forest (i.e. NEP). with the IRF of CO2 convoluted with the emission profile of the oxidation rate (see bio_emis_yr and bio_decay). 
     
@@ -418,11 +397,3 @@ def co2bio_landscape_decay(cutoff=100,tstep='Y',NEP=None,bio_decay="delta",bio_e
     #calculate actual emission profile of landscape forest
     decay_bio=np.convolve(conv_emis,NEP,mode='full')[:IRF.size]
     return decay_bio
-    
-    
-#tis two are the same!!!
-#~# plt.plot(np.convolve(np.append(np.array(1),np.repeat(0,99))-ForestGrowth.normal_growth(tstep=1)[:100],AtmosphericDecay('co2',np.arange(0,100)))[:100]) #non sifting
-#~# 
-#~#plt.plot(AtmosphericDecay('co2',np.arange(0,100))-np.convolve(AtmosphericDecay('co2',np.arange(0,100)),ForestGrowth.normal_growth(tstep=1))[:100])#sifting
-
-#plt.plot(np.convolve(np.repeat(1,100),biorif)[:100]) #heaviside step function for landscape knowing nep of stand
