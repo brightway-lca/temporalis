@@ -35,9 +35,7 @@ install:
     - cmd: call %CONDA_INSTALL_LOCN%\Scripts\activate.bat
     - cmd: conda update -y -q conda
     - cmd: conda config --add channels conda-forge
-    - cmd: conda install -y -q numpy scipy psutil numexpr
-    - cmd: conda install -y -q pypardiso -c haasad
-    - cmd: pip install --no-cache-dir eight pytest
+    - cmd: conda install -y -q -c defaults -c conda-forge -c cmutel -c haasad numpy scipy psutil numexpr pypardiso eight pytest peewee==2.10.2
     - cmd: pip install --no-cache-dir bw2io==0.6RC3 bw2calc bw2data==3.0.RC2 bw2speedups
 
 build: false
