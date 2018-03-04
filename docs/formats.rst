@@ -7,26 +7,25 @@ Inventory
 Exchanges with temporal distributions
 -------------------------------------
 
-Both inventory dataset inputs and biosphere flows (i.e. exchanges) can be distributed in time, and can occur both before and after the inventory dataset itself. This distribution is specified in the new key ``temporal distribution``:
+Both inventory dataset inputs and biosphere flows (i.e. exchanges) can be distributed in time, can occur both before and after the inventory dataset itself and be in absolute or relative time. Their distribution is specified using the :ref:`temporal` object. and are stored in `brightway2 <https://docs.brightwaylca.org/intro.html#activity-data-format>`_ using the key ``temporal distribution``:
 
 .. code-block:: python
-
+    
     "exchanges": [
         {
-            "amount": 1000,
-            "temporal distribution": [
-                (0,  500),
-                (7.5, 250),
-                (15, 250)
+            "amount": 5,
+            "temporal distribution": TemporalDistribution(np.array([ 0,  1,  2,  3,  4],dtype='timedelta64[Y]') ,np.array([1.0, 1.0, 1.0, 1.0, 1.0])),            
             ]
         }
     ]
 
-Each tuple in ``temporal distribution`` has the format ``(relative temporal difference (in years), amount)``. Temporal differences can be positive or negative, and give the difference between when the inventory dataset and the exchange occur.
+See `the example <https://bitbucket.org/cmutel/brightway2-temporalis/src/default/bw2temporalis/examples/inv.py>`__ for a real-world implementation.
 
-The default unit of time is years, but fractional years are allowed.
+.. ~Each tuple in ``temporal distribution`` has the format ``(relative temporal difference (in years), amount)``. Temporal differences can be positive or negative, and give the difference between when the inventory dataset and the exchange occur.
 
-The sum of all amounts in the temporal distribution should equal the total exchange amount. This is **not** checked automatically, but can be checked using the ``utils.check_temporal_distribution_totals`` function.
+.. ~The default unit of time is years, but fractional years are allowed.
+
+The sum of all amounts in the temporal distribution should equal the total exchange amount. This is checked automatically during the LCI solving.
 
 Impact Assessment
 =================
@@ -101,7 +100,7 @@ However, there are some things to bear in mind with dynamic characterization fun
     return (arrow.get(datetime) - arrow.get(2011, 6, 23)).days"""
     }
 
-This can be a bit confusing. See `the examples <https://bitbucket.org/cmutel/brightway2-temporalis/src/default/bw2temporalis/examples/ia.py?at=default#cl-76>`__ for a real-world implementation.
+This can be a bit confusing. See `the examples <https://bitbucket.org/cardosan/brightway2-temporalis/src/default/bw2temporalis/examples/ia.py?at=default&fileviewer=file-view-default#cl-80>`__ for a real-world implementation.
 
 These function strings will be executed using ``exec``. Don't accept dynamic characterization function code from strange men in dark alleyways.
 
@@ -121,6 +120,6 @@ Returned CFs must be `named tuples <https://docs.python.org/2/library/collection
         return_tuple = collections.namedtuple('return_tuple', ['dt', 'amount'])
         return [return_tuple(datetime + timedelta(days=x), 1 / 7.) for x in range(7)]
 
-See also `functions in the examples <https://bitbucket.org/cmutel/brightway2-temporalis/src/default/bw2temporalis/examples/ia.py?at=default#cl-99>`__.
+See also `functions in the examples <https://bitbucket.org/cardosan/brightway2-temporalis/src/default/bw2temporalis/examples/ia.py?at=default&fileviewer=file-view-default#cl-99>`__.
 
 Aside from the return format, they are identical to normal dynamic characterization factors, and have the same restrictions.

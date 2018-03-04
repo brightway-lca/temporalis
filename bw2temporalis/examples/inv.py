@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function, unicode_literals
 from eight import *
+from bw2temporalis import TemporalDistribution
+import numpy as np
 
 
 db_data = {
@@ -15,13 +17,8 @@ db_data = {
             {
                 'amount': 5,
                 'input': ('temp-example-db', 'EOL'),
-                'temporal distribution': [
-                    (0, 1),
-                    (1, 1),
-                    (2, 1),
-                    (3, 1),
-                    (4, 1)
-                ],
+                'temporal distribution': TemporalDistribution(np.array([ 0,  1,  2,  3,  4],dtype='timedelta64[Y]') ,np.array([1.0, 1.0, 1.0, 1.0, 1.0])),
+
                 'type': 'technosphere'
             },
         ],
@@ -54,7 +51,7 @@ db_data = {
             {
                 'amount': 1,
                 'input': ('temp-example-db', 'Production'),
-                'temporal distribution': [(-0.5, 1)],
+                'temporal distribution': TemporalDistribution(np.array([4],dtype='timedelta64[M]') ,np.array([1.0])),
                 'type': 'technosphere'
             },
         ],
@@ -66,7 +63,7 @@ db_data = {
             {
                 'amount': 1,
                 'input': ('temp-example-db', 'Transport'),
-                'temporal distribution': [(-0.1, 1)],
+                'temporal distribution': TemporalDistribution(np.array([200],dtype='timedelta64[D]') ,np.array([1.0])),
                 'type': 'technosphere'
             },
         ],
@@ -94,7 +91,7 @@ db_data = {
             {
                 'amount': 1.2,
                 'input': ('temp-example-db', 'Forest'),
-                'temporal distribution': [(-0.5, 1.2)],
+                'temporal distribution':  TemporalDistribution(np.array([14],dtype='timedelta64[M]') ,np.array([1.2])),
                 'type': 'technosphere'
             },
             {
@@ -111,17 +108,13 @@ db_data = {
             {
                 'amount': -.2 * 6,
                 'input': ('temp-example-db', 'CO2'),
-                'temporal distribution': [(x, -.2) for x in (0, 5, 10, 15, 20, 30)],
+                'temporal distribution': TemporalDistribution(np.array([-4,-3,0,1,2,5],dtype='timedelta64[Y]') ,np.array([-.2]*6)), 
                 'type': 'biosphere'
             },
             {
                 'amount': 1.5,
                 'input': ('temp-example-db', 'Thinning'),
-                'temporal distribution': [
-                    (5, .5),
-                    (10, .5),
-                    (15, .5),
-                ],
+                'temporal distribution': TemporalDistribution(np.array([-3,0,1],dtype='timedelta64[Y]') ,np.array([.5]*3)),
                 'type': 'technosphere'
             },
         ],
@@ -149,12 +142,7 @@ db_data = {
             {
                 'amount': 0.1,
                 'input': ('temp-example-db', 'CH4'),
-                'temporal distribution': [
-                    (20, 0.025),
-                    (30, 0.025),
-                    (40, 0.025),
-                    (50, 0.025)
-                ],
+                'temporal distribution': TemporalDistribution(np.array([10,20,40,60],dtype='timedelta64[M]') ,np.array([0.025]*4)), 
                 'type': 'biosphere'
             },
         ],

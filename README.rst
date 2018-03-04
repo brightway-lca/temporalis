@@ -11,8 +11,8 @@
     :target: https://ci.appveyor.com/project/cardosan78214/brightway2-temporalis
     :alt: bw2temporalis appveyor build status
 
-.. image:: https://coveralls.io/repos/bitbucket/cardosan/brightway2-temporalis/badge.svg?branch=master
-    :target: https://coveralls.io/bitbucket/cardosan/brightway2-temporalis?branch=master
+.. image:: https://coveralls.io/repos/bitbucket/cardosan/brightway2-temporalis/badge.svg?branch=default
+    :target: https://coveralls.io/bitbucket/cardosan/brightway2-temporalis?branch=default
     :alt: Test coverage report
     
 .. image:: https://readthedocs.org/projects/temporalis/badge/?version=latest
@@ -22,4 +22,6 @@
 Brightway2 temporalis
 =====================
 
-This package provides a dynamic (i.e. varying in time) LCA calculations for the `Brightway2 life cycle assessment framework <https://brightwaylca.org>`_. `Online documentation <http://temporalis.readthedocs.io/en/latest/>`_ is available, and the source code is hosted on `Bitucket <https://bitbucket.org/cmutel/brightway2-temporalis>`_.
+This package provides a dynamic (i.e. varying in time) LCA calculations package for the `Brightway2 life cycle assessment framework <https://brightwaylca.org>`_. 
+
+`Online documentation <http://temporalis.readthedocs.io/en/latest/>`_ is available, and the source code is hosted on `Bitucket <https://bitbucket.org/cardosan/brightway2-temporalis>`_.

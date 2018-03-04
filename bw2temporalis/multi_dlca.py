@@ -18,7 +18,7 @@ except ImportError:
     dynamic_calculation_setups = None
     
 
-#TO MAKE IT WORK REMEMBER TO ADD THIS TO BW2DATA.META AND ACCORDINGLY CHANGE ALSO THE __init___ FILE OF BW2DATA
+#TO MAKE IT WORK REMEMBER TO ADD THIS TO BW2DATA.META 
 #~@python_2_unicode_compatible
 #~class DynamicCalculationSetups(PickledDict):
     #~"""A dictionary for Dynamic calculation setups.
@@ -29,6 +29,15 @@ except ImportError:
 #~
     #~"""
     #~filename = "dynamicsetups.pickle"
+    
+#~AND ALSO THIS AT THE END OF BW2DATA.META 
+#~dynamic_calculation_setups = DynamicCalculationSetups()
+
+#~AND ACCORDINGLY CHANGE ALSO THE __init___ FILE OF BW2DATA adding `dynamic_calculation_setups` in `__all__ `, `from .meta import (`  and  `config.metadata.extend`
+
+
+    
+    
 
 
 class MultiDynamicLCA(object):
