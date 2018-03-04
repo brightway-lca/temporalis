@@ -1,11 +1,13 @@
-Dynamic LCA through temporal graph traversal: brightway2-temporalis
-*******************************************************************
+Temporalis: an open source software for dynamic LCA
+********************************************************
 
-A library for the `Brightway2 LCA calculation framework <http://brightwaylca.org/>`_ that allows for a specific kind of dynamic life cycle assessments.
+An open source library for the `Brightway2 LCA calculation framework <http://brightwaylca.org/>`_ that allows for a specific kind of dynamic life cycle assessments. 
 
-Brightway2-temporalis is open source. `Source code is available on bitbucket <https://bitbucket.org/cmutel/brightway2-temporalis>`_, and `documentation is available on read the docs <http://example.com>`_.
+`Source code is available on bitbucket <https://bitbucket.org/cardosan/brightway2-temporalis>`_, and `documentation is available on read the docs <http://temporalis.readthedocs.io/en/latest/>`_.
 
-Brightway2-temporalis has the following abilities:
+Temporalis allows to perform dynamic LCA and take into account time in both inventory and impact assessment. It makes use of `graph traversal <https://docs.brightwaylca.org/lca.html#illustration-of-graph-traversal>`_ and `convolution <https://en.wikipedia.org/wiki/Convolution>`_ to solve the inventory and makes it possible to use several types of impact assessment methods, both static and dynamic.
+
+Temporalis has the following abilities:
 
 * Exchanges (technosphere inputs, and biosphere outputs) can be offset in time.
 * Individual exchanges can be split into multiple time steps, creating a temporal distribution for each exchange.
@@ -13,12 +15,69 @@ Brightway2-temporalis has the following abilities:
 * Characterization factors can vary as a function of time.
 * Characterization factors can spread impact over time.
 
-However, Brightway2-temporalis has the following limitations:
+However, it has the following limitations:
 
-* Inventory datasets cannot change their inputs as a function of time. This limitation is necessary for the graph traversal to converge.
+* Inventory datasets cannot change their inputs as a function of time (i.e. are time invariant). This limitation is necessary for the graph traversal to converge.
 * Exchanges must be linear, as in normal matrix-based LCA.
 
-See the example ipython notebook (`nbviewer <http://nbviewer.ipython.org/url/brightwaylca.org/examples/brightway2-temporalis.ipynb>`_, `html <https://brightwaylca.org/examples/brightway2-temporalis.html>`_) for a real usage example.
+The methodology behind Temporalis is explained in detail in the article `Temporalis, a generic method and tool for dynamic Life Cycle Assessment` (under review). `This repo <https://github.com/cardosan/dLCA>`_ contains the jupyter notebooks used in the paper with several real usage examples.
+
+.. ~See also the example ipython notebook (`nbviewer <http://nbviewer.ipython.org/url/brightwaylca.org/examples/brightway2-temporalis.ipynb>`_, `html <https://brightwaylca.org/examples/brightway2-temporalis.html>`_) for a real usage example.
+
+
+
+Installation
+============
+Temporalis can be installed via pip from `PyPI <https://pypi.python.org/pypi/bw2temporalis>`_ .
+
+```
+pip install bw2temporalis
+```
+
+which will also install all its dependencies
+
+Python version support
+======================
+
+Python 3.5, and 3.6.
+
+License
+=======
+
+BSD 3-clause. See the file `LICENSE.txt
+<https://bitbucket.org/cardosan/brightway2-temporalis/src/4f50c425137143686a63d1aa8f5fe77d3938ed99/LICENSE.txt?at=default&fileviewer=file-view-default>`_ for details.
+
+Additional Resources
+====================
+
+Temporalis is a package extension of the advanced life cycle assessment framework Brightway2, here you can find some info about it:
+
+- https://bitbucket.org/cmutel/brightway2 (Brightway2 repo)
+- https://brightwaylca.org/ (Brightway2 online documentation)
+- https://github.com/PoutineAndRosti/Brightway-Seminar-2017  (good starting point for learning Brightway2)
+
+Authors
+=======
+
+- Giuseppe Cardellini (giuseppe.cardellini@gmail.com)
+- Chris Mutel (cmutel@gmail.com)
+
+Contributing
+============
+
+Any constructive contributions, bug reports, pull requests (both code and documentation), suggestions for improvements etc. is welcome. Just follow the `contribution guidelines <https://bitbucket.org/cardosan/brightway2-temporalis/src/4f50c425137143686a63d1aa8f5fe77d3938ed99/LICENSE.txt?at=default&fileviewer=file-view-default>`_ or take :ref:`contact` with the developers.
+
+Code of conduct
+===============
+
+Temporalis follows the `Contributor Covenant <http://contributor-covenant.org/>`__. See the file `CODE_OF_CONDUCT.md  <https://bitbucket.org/cardosan/brightway2-temporalis/src/4f50c425137143686a63d1aa8f5fe77d3938ed99/CODE_OF_CONDUCT.md?at=default&fileviewer=file-view-default>`_ for details.
+
+.. _contact:
+
+Contacts
+========
+
+- Write an email to Giuseppe Cardellini (giuseppe.cardellini@gmail.com) or `open an issue <https://bitbucket.org/cardosan/brightway2-temporalis/issues>`_ on the bitbucket page of Temporalis.
 
 Table of contents
 =================
@@ -27,7 +86,7 @@ Table of contents
    :maxdepth: 2
 
    strategy
-   comparison
+   traversal
    formats
    gotchas
    technical

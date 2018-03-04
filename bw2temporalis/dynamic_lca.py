@@ -39,13 +39,15 @@ Args:
     * *max_calc_number* (int, default=10000): Maximum number of LCA calculations to perform.
     * *loop_cutoff* (int, default=10): Maximum number of times loops encountered will be traversed.
     * *t0* (datetime, default=np.datetime64('now')): `datetime` of the year zero (i.e. the one of the functional unit). 
-    #~* *group* (Boolean, default=False: When 'True' groups the impact upstream for each of the processes with the field`grouping_field`==True
-    #~* *grouping_field* (string, default='tempo_group': The bw2 field to look for when grouping impacts upstream. When ``group`==True and a process has `grouping_field`==True the impacts are grouped upstream for it untill another  process with `grouping_field`==True is found
     * *group* (Boolean, default=False: When 'True' groups the impact upstream for each of the processes based on the values of `grouping_field`
     * *grouping_field* (string, default='tempo_group': The bw2 field to look for when grouping impacts upstream. When ``group`==True and a process has `grouping_field==whatever` the impacts are grouped upstream with name ``whatever` untill another  process with `grouping_field==another name` is found. If `grouping_field==True` it simply uses the name of the process
     * *log* (int, default=False): If True to make log file
     * *lca_object* (LCA object,default=None): do dynamic LCA for the object passed (must have "characterized_inventory" i.e. LCA_object.lcia() has been called)
     """
+
+    #* *group* (Boolean, default=False: When 'True' groups the impact upstream for each of the processes with the field`grouping_field`==True
+    #* *grouping_field* (string, default='tempo_group': The bw2 field to look for when grouping impacts upstream. When ``group`==True and a process has `grouping_field`==True the impacts are grouped upstream for it untill another  process with `grouping_field`==True is found
+    
     def __init__(self, demand, worst_case_method, t0=None, max_calc_number=1e4, cutoff=0.001,loop_cutoff=10,group=False,grouping_field="tempo_group", log=False, lca_object=None):
         self.demand = demand
         self.worst_case_method = worst_case_method

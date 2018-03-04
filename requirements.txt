@@ -1,13 +1,10 @@
-brightway2>=0.14
-bw2analyzer>=0.5.1
-bw2calc>=0.14.1
-bw2data>=0.17
+brightway2>=2.1.1
+bw2data>=3.0.RC2
+bw2calc bw2io>=0.6RC3
 bw2speedups>=2.2
-colorama
 eight
 nose
 numpy>=1.6
 scipy
-stats_arrays>=0.2.2
-voluptuous
 numexpr
+

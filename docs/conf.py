@@ -30,27 +30,64 @@ sys.path.insert(1, abspath(dirname(dirname(__file__))))
 
 # Mock out numpy, scipy and scikit-image for building the docs on readthedocs.
 # http://read-the-docs.readthedocs.org/en/latest/faq.html#i-get-import-errors-on-libraries-that-depend-on-c-modules
+
+#see also should this below not working http://catherineh.github.io/programming/2016/04/13/mocking-entire-modules
+
+#~try:
+    #~from unittest.mock import MagicMock
+#~except ImportError:
+    #~from mock import Mock as MagicMock
+
+#~class Mock(MagicMock):
+    #~@classmethod
+    #~def __getattr__(cls, name):
+        #~if name == "_mock_methods":
+            #~return name._mock_methods
+        #~else:
+            #~return Mock()
+
+#~MOCK_MODULES = [
+    #~'numpy',
+    #~'scipy',
+    #~'pandas',
+    #~'bw2speedups',
+    #~#'pypardiso',
+    #~'numpy.linalg',
+    #~'scipy.sparse',
+    #~'scipy.sparse.linalg',
+    #~'scipy.stats',
+    #~'numexpr',
+    #~'.dyn_methods.timedependent_lca',
+#~]
+#~sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
+
+
+#TO CHECK IMPORTING
+
+import sys
+import os
+
 try:
-    from unittest.mock import MagicMock
+    import numpy
+    #~print "numpy: %s, %s" % (numpy.__version__, numpy.__file__)
 except ImportError:
-    from mock import Mock as MagicMock
-
-class Mock(MagicMock):
-    @classmethod
-    def __getattr__(cls, name):
-        if name == "_mock_methods":
-            return name._mock_methods
-        else:
-            return Mock()
-        #~return Mock()
-
-MOCK_MODULES = [
-    'numpy',
-    'scipy',
-    'pandas',
-    'bw2speedups',
-]
-sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
+    print ("no numpy")
+try:
+    import scipy
+except ImportError:
+    print ("no scipy")
+try:
+    import pandas
+except ImportError:
+    print ("no pandas")
+try:
+    import bw2speedups
+except ImportError:
+    print ("no bw2speedups")
+try:
+    import numexpr
+except ImportError:
+    print ("no numexpr")
 
 
 # -- General configuration -----------------------------------------------------
@@ -126,7 +163,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'default'
+html_theme = 'nature'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -155,8 +192,8 @@ html_theme = 'default'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
-
+#~html_static_path = ['_static'] #not working
+#~html_static_path = ['_build/html/_static'] #working but not sure correct
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
 #html_last_updated_fmt = '%b %d, %Y'

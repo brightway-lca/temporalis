@@ -3,34 +3,33 @@ import io
 
 setup(
     name='bw2temporalis',
-    version="0.9.2",
+    version="1.0.rc3",
     packages=[
         "bw2temporalis",
         "bw2temporalis.tests",
         "bw2temporalis.examples",
-        "bw2temporalis.cofire"
+        "bw2temporalis.dyn_methods"
     ],
-    author="Chris Mutel",
-    author_email="cmutel@gmail.com",
+    author="Giuseppe Cardellini, Chris Mutel",
+    author_email="giuseppe.cardellini@gmail.com, cmutel@gmail.com",
     license=io.open('LICENSE.txt', encoding='utf-8').read(),
-    url="https://bitbucket.org/cmutel/brightway2-temporalis",
+    url="https://bitbucket.org/cardosan/brightway2-temporalis",
     install_requires=[
-        "arrow",
-        "eight",
-        "brightway2",
-        "bw2analyzer",
-        "bw2calc>=0.11",
-        "bw2data>=0.12",
-        "bw2speedups>=2.0",
-        "numexpr",
-        "numpy",
-        "scipy",
-        "stats_arrays",
+        "brightway2>=2.1.1"
+        "bw2data>=3.0.RC2"
+        "bw2calc"
+        "bw2io>=0.6RC3"
+        "bw2speedups>=2.2"
+        "eight"
+        "nose"
+        "numpy>=1.6"
+        "scipy"
+        "numexpr"
     ],
     description='Provide a dynamic LCA calculations for the Brightway2 life cycle assessment framework',
     long_description=io.open('README.rst', encoding='utf-8').read(),
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: End Users/Desktop',
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
@@ -39,7 +38,7 @@ setup(
         'Operating System :: Microsoft :: Windows',
         'Operating System :: POSIX',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
+        #~'Programming Language :: Python :: 2.7', #to be fixed
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Topic :: Scientific/Engineering :: Information Analysis',

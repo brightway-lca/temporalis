@@ -1,6 +1,19 @@
 Changelog
 *********
 
+1.0.0 (2018-02-XX)
+==================
+
+* Added ``MultiDynamicLCA()``.
+* Added ``create_climate_methods()`` for dynamic climate metrics.
+* Added ``time_dependent_LCA()``.
+* Dynamic climate methods take into account also forest regrowth.
+* ``DynamicLCA.calculate()`` now traverses only once.
+* ``TemporalDistribution`` uses numpy datetimes.
+* Included Continuous Integration
+* Several bugfixes
+
+
 0.6.1 (2014-XX-XX)
 ==================
 
