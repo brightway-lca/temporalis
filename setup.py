@@ -3,7 +3,7 @@ import io
 
 setup(
     name='bw2temporalis',
-    version="1.0.rc3",
+    version="1.0.rc1",
     packages=[
         "bw2temporalis",
         "bw2temporalis.tests",
@@ -15,16 +15,14 @@ setup(
     license=io.open('LICENSE.txt', encoding='utf-8').read(),
     url="https://bitbucket.org/cardosan/brightway2-temporalis",
     install_requires=[
-        "brightway2>=2.1.1"
-        "bw2data>=3.0.RC2"
-        "bw2calc"
-        "bw2io>=0.6RC3"
-        "bw2speedups>=2.2"
-        "eight"
-        "nose"
-        "numpy>=1.6"
-        "scipy"
-        "numexpr"
+        "brightway2>=2.1.1",
+        "bw2data>=3.0",
+        "bw2calc",
+        "bw2io>=RC3",
+        "bw2speedups>=2.2",
+        "numpy>=1.6",
+        "scipy",
+        "numexpr",
     ],
     description='Provide a dynamic LCA calculations for the Brightway2 life cycle assessment framework',
     long_description=io.open('README.rst', encoding='utf-8').read(),
@@ -40,7 +38,8 @@ setup(
         'Programming Language :: Python',
         #~'Programming Language :: Python :: 2.7', #to be fixed
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Topic :: Scientific/Engineering :: Information Analysis',
         'Topic :: Scientific/Engineering :: Mathematics',
         'Topic :: Scientific/Engineering :: Visualization',
