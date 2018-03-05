@@ -16,9 +16,9 @@
 # built documents.
 #
 # The short X.Y version.
-version = '0.9'
+version = '1.0'
 # The full version, including alpha/beta/rc tags.
-release = '0.9.2'
+release = '1.0.RC1'
 
 import sys
 from os.path import abspath, dirname
@@ -236,7 +236,7 @@ html_theme = 'nature'
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Brightway2-temporalisdoc'
+htmlhelp_basename = 'Temporalisdoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
