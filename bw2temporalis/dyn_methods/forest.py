@@ -34,7 +34,8 @@ def get_static_forest_keys():
     "paraná pine, standing, under bark, in rain forest",
     "softwood, Scandinavian, standing, under bark, in forest"]
 
-    ei_32_33 = ["softwood forestry, paraná pine, sustainable forest management",
+    ei_32_33 = [
+    "softwood forestry, paraná pine, sustainable forest management",
      "hardwood forestry, mixed species, sustainable forest management",
      "hardwood forestry, beech, sustainable forest management",
      "softwood forestry, spruce, sustainable forest management",
@@ -46,12 +47,33 @@ def get_static_forest_keys():
      "softwood forestry, mixed species, sustainable forest management",
      "hardwood forestry, oak, sustainable forest management",
      "hardwood forestry, birch, sustainable forest management",
-     "hardwood forestry, eucalyptus ssp., sustainable forest management"]
+     "hardwood forestry, eucalyptus ssp., sustainable forest management"
+     ]
     
     #it should be the first one, but as it is not temporalis must be the second
-    estelle=['_Wood waste, sorted at panel plant, 20% water on dry mass basis/ EU U',
-            '_Wood construction waste, 20% water on dry mass basis',
-            ]
+    #~estelle=[
+    #~'_Wood waste, sorted at panel plant, 20% water on dry mass basis/ EU U',
+            #~'_Wood construction waste, 20% water on dry mass basis',
+            #~]
+    estelle=[
+    #'_Allocation correction, spruce, 20% water on dry basis',
+ #'_Aqueous microporous paint for wood, SIPEV/FR S_26082014',
+ #'_Aqueous phase coating, SIPEV/FR S_20140527',
+  #'_Polyurethane glue, Bostik, at plant/FR S_20140627',
+ #'_Transport, lorry >28t, fleet average/CH S_litre',
+ #'Polyethylene, HDPE, granulate, at plant/RER',
+
+ '_Beech industrial roundwood, 80% water on dry mass basis, at forest road/FR S_20120830',
+ '_Douglas-fir industrial roundwood, 65% water on dry mass basis, at forest road/FR S_20120830',
+ '_Maritime pine industrial roundwood, 100% water on dry mass basis, at forest road/FR S_20120830',
+ '_Oak industrial roundwood, 80% water on dry mass basis, at forest road/FR S_20120830',
+ '_Scotch pine industrial roundwood, 104% water on dry mass basis, at forest road/FR S_20120830',
+ '_Spruce industrial roundwood, 111% water on dry mass basis, at forest road/FR S_20120830',
+ '_Wood waste, sorted at panel plant, 20% water on dry mass basis/ EU U',
+ '_Wood construction waste, 20% water on dry mass basis',
+ ]
+
+            
             
     test=['co2bio_test']
 

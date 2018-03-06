@@ -3,8 +3,6 @@ from __future__ import print_function, unicode_literals
 from eight import *
 
 import numpy as np
-import arrow
-
 
 def cumulative_CO2(year):
     """Gives total radiative forcing from year zero to year *year* in watts/square meter/kilogram of CO2. From:
@@ -54,14 +52,14 @@ def marginal_CH4(year, delta=1):
     return diff
 
 
-Y2000 = arrow.get('2000-01-01').datetime
-Y2100 = arrow.get('2100-01-01').datetime
+Y2000 = datetime.datetime(2000, 1, 1)
+Y2100 = datetime.datetime(1000, 1, 1)
 SLOPE = -1. / (Y2100 - Y2000).days
 
 
 def linear_decrease_weight(dt):
     """Linear decrease from *start_year* to *end_year*, from 1 to 0."""
-    # Convert from Arrow if needed
+    # Convert from datetime if needed
     if hasattr(dt, "datetime"):
         dt = dt.datetime
     if dt < Y2000:
