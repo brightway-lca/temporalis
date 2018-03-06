@@ -1,8 +1,8 @@
 {% set name = "bw2temporalis" %}
-{% set version = "1.0rc3" %}
+{% set version = "1.0" %}
 {% set file_ext = "tar.gz" %}
 {% set hash_type = "sha256" %}
-{% set hash_value = "7f79c3c351636edbf82182399185868f047fc3917c5b20061f8e17be4bf2a43e" %}
+{% set hash_value = "dbf0374426f43b18e4c84b44a0d5337780b47c97120331f7d9c4427a8b76072d" %}
 
 package:
   name: '{{ name|lower }}'
@@ -54,15 +54,13 @@ about:
   license_family: BSD
   license_file: ''
   summary: Provide a dynamic LCA calculations for the Brightway2 life cycle assessment framework
-  description: 'Brightway2 temporalis
-
-    =====================
-
-
-    This package provides a dynamic (i.e. varying in time) LCA calculations for the `Brightway2 life cycle assessment framework <https://brightwaylca.org>`_. `Online documentation <https://brightway2-temporalis.readthedocs.io/en/latest/>`_
-    is available, and the source code is hosted on `Bitucket <https://bitbucket.org/cmutel/brightway2-temporalis>`_.
-
-    '
+  description: ".. ~\n.. ~.. image:: https://ci.appveyor.com/api/projects/status/aiccd0gega0v7suq/branch/default?svg=true\n.. ~\t:target: https://coveralls.io/bitbucket/cardosan/brightway2-temporalis2_delete?branch=master\n\
+    .. ~\t:alt: bw2temporalis appveyor build status\n.. ~\n.. ~.. image:: https://coveralls.io/repos/bitbucket/cardosan/brightway2-temporalis2_delete/badge.svg?branch=master\n.. ~\t:target: https://coveralls.io/bitbucket/cardosan/brightway2-temporalis2_delete?branch=master\n\
+    .. ~    :alt: Test coverage report\n\n.. image:: https://ci.appveyor.com/api/projects/status/bfyb3bs48fnkful3?svg=true\n    :target: https://ci.appveyor.com/project/cardosan78214/brightway2-temporalis\n\
+    \    :alt: bw2temporalis appveyor build status\n\n.. image:: https://coveralls.io/repos/bitbucket/cardosan/brightway2-temporalis/badge.svg?branch=default\n    :target: https://coveralls.io/bitbucket/cardosan/brightway2-temporalis?branch=default\n\
+    \    :alt: Test coverage report\n    \n.. image:: https://readthedocs.org/projects/temporalis/badge/?version=latest\n    :target: http://temporalis.readthedocs.io/en/latest/?badge=latest\n    :alt:\
+    \ Documentation Status\n\nBrightway2 temporalis\n=====================\n\nThis package provides a dynamic (i.e. varying in time) LCA calculations package for the `Brightway2 life cycle assessment framework\
+    \ <https://brightwaylca.org>`_. \n\n`Online documentation <http://temporalis.readthedocs.io/en/latest/>`_ is available, and the source code is hosted on `Bitucket <https://bitbucket.org/cardosan/brightway2-temporalis>`_.\n"
   doc_url: ''
   dev_url: ''
 
