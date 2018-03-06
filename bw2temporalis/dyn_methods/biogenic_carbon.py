@@ -30,49 +30,99 @@ class ForestGrowth(object):
     ##########
     #TO CLEAN#
     ##########
+    
+    
+    
+    #~def schnute_growth(t,T2,y2,a,b,Tr,Th=None,T1=0,y1=0,tstep=1):
+        #~"""calculate growth for an array of yrs with the param
+        #~t=numpy array with time dimension (i.e. range of years for which to calculate, do not forget python is zero indexed... )
+        #~T1=initial age of the interval(default = 0)
+        #~T2= final age of the interval  (i.e. year when maxium stock is reached, in Cherubini assume Tr*2)
+        #~y1= stock at T1, default = 0
+        #~y2 stock at T2, default = 0
+        #~a=paramater of the schnute model
+        #~b=paramater of the schnute model
+        #~Tr=rotation period (hipotetical)
+        #~Th= time of harvest (default is Tr=Th but real harvest can happen before or after theoretical rotation)
+#~
+        #~# need to add tsteps
+        #~"""
+        #~if Th==None:
+            #~Th=Tr
+        #~#stock
+        #~st=evaluate("(( (y1**b) + ((y2**b) - (y1**b)) ) * (( 1- exp( -a* (t - T1 ) ) ) / (1- exp( -a* (T2 - T1 ))))) ** (1/b)") #see Comparison of Schnute’s and Bertalanffy- Richards’ growth function 
+        #~norm_st=st/np.full(len(st), st[Tr]) # calculate normalized growth (divide by stock at Tr)
+#~
+        #~#growth
+        #~gr_r=np.diff(st) #calculate growth rate i.e. derivative
+        #~norm_gr_r=np.diff(norm_st) #normalized growth rate i.e. relative to 1 unit sequestered
+        #~#add zero for yr o
+        #~gr_r=np.insert(gr_r, 0, 0) 
+        #~norm_gr_r=np.insert(norm_gr_r, 0, 0) 
+#~
+        #~#set to 0 from yr of harvest on
+        #~for arr in [st,norm_st,gr_r,norm_gr_r]:
+            #~arr[Th:]=0
+        #~return st,norm_st,gr_r,norm_gr_r
 
-    #~ def schnute_growth(t,T2,y2,a,b,Tr,Th=None,T1=0,y1=0,tstep=1):
-        #~ """calculate growth for an array of yrs with the param
-        #~ t=numpy array with time dimension (i.e. range of years for which to calculate, do not forget python is zero indexed... )
-        #~ T1=initial age of the interval(default = 0)
-        #~ T2= final age of the interval  (i.e. year when maxium stock is reached, in Cherubini assume Tr*2)
-        #~ y1= stock at T1, default = 0
-        #~ y2 stock at T2, default = 0
-        #~ a=paramater of the schnute model
-        #~ b=paramater of the schnute model
-        #~ Tr=rotation period (hipotetical)
-        #~ Th= time of harvest (default is Tr=Th but real harvest can happen before or after theoretical rotation)
-        #~ 
-        #~ # need to add tsteps
-        #~ 
-        #~ """
-    #~ #     t = np.linspace(t[0], t[-1], tstep )  
-    #~ #     slice_step = int(1/tstep)
-        #~ 
-        #~ if Th==None:
-            #~ Th=Tr
-        #~ 
-        #~ #stock
-        #~ st=evaluate("(( (y1**b) + ((y2**b) - (y1**b)) ) * (( 1- exp( -a* (t - T1 ) ) ) / (1- exp( -a* (T2 - T1 ))))) ** (1/b)") #see Comparison of Schnute’s and Bertalanffy- Richards’ growth function 
-        #~ norm_st=st/np.full(len(st), st[Tr]) # calculate normalized growth (divide by stock at Tr)
-    #~ 
-        #~ #growth
-        #~ gr_r=np.diff(st) #calculate growth rate i.e. derivative
-        #~ norm_gr_r=np.diff(norm_st) #normalized growth rate i.e. relative to 1 unit sequestered
-            #~ #add zero for yr o
-        #~ gr_r=np.insert(gr_r, 0, 0) 
-        #~ norm_gr_r=np.insert(norm_gr_r, 0, 0) 
-    #~ 
-    #~ 
-        #~ #set to 0 from yr of harvest on
-        #~ for arr in [st,norm_st,gr_r,norm_gr_r]:
-            #~ arr[Th:]=0
-        #~ # norm_st[Th:]=0
-        #~ # gr_r[Th:]=0 # 
-        #~ # norm_gr_r[Th:]=0 # set to 0 at new rotation
-    #~ 
-    #~ #     return st[0::1/slice_step],nor_st[0::1/slice_step],rel_gr[0::1/slice_step]
-        #~ return st,norm_st,gr_r,norm_gr_r
+    #~def schnute_growth(T1=0,T2=200,y1=0,y2=50,a=0.0245,b=0.3714,Tr=100,Th=None,tstep=.1):
+    
+    def schnute_growth(T1=0,T2=200,y1=0,y2=50,a=0.0245,b=0.3714,Tr=100,Th=None):
+
+        """Calculate Schnute growth rate for an array of yrs. Default values are taken from `Effects of boreal forest management practices on the climate impact of CO2 emissions from bioenergy`.
+        
+        t=numpy array with time dimension (i.e. range of years for which to calculate)
+        T1=initial age of the interval(default = 0)
+        T2= final age of the interval  (i.e. year when maxium stock is reached, in Cherubini assume Tr*2)
+        y1= stock at T1, default = 0
+        y2 stock at T2, default = 50
+        a=paramater representing the constant acceleration in growth rate. Default is 0.0245
+        b=paramater representing the incremental acceleration in growth rate. Default is 0.3714
+        Tr=rotation period (hipotetical), by default 100 years
+        Th= time of harvest. Default is Tr=Th but real harvest can happen before or after theoretical rotation
+        """
+        
+        #NEED TO FIX THIS
+        tstep=1
+
+        if Th==None:
+            Th=Tr
+           #~
+        #~T1=T1/tstep
+        #~T2=T2/tstep
+        #~y2=y2/tstep
+        #~Tr=Tr/tstep
+        #~Th=Th/tstep
+        #~
+    
+            
+        t=np.linspace(0, Th,(Th/tstep+1))
+
+        #stock
+        st=evaluate("(( (y1**b) + ((y2**b) - (y1**b)) ) * (( 1- exp( -a* (t - T1 ) ) ) / (1- exp( -a* (T2 - T1 ))))) ** (1/b)") #see Comparison of Schnute’s and Bertalanffy- Richards’ growth function 
+        
+        #~st=evaluate("(( (y1**b) + ((y2**b) - (y1**b)) ) * (( 1- exp( -a* ((t/tstep) - T1 ) ) ) / (1- exp( -a* (T2 - T1 ))))) ** (1/b)") #see Comparison of Schnute’s and Bertalanffy- Richards’ growth function 
+
+        #~st=evaluate("(( ((y1*tstep)**b) + (((y2*tstep)**b) - ((y1*tstep)**b)) ) * (( 1- exp( -a* (t - T1 ) ) ) / (1- exp( -a* ((T2/tstep) - T1 ))))) ** (1/b)") #see Comparison of Schnute’s and Bertalanffy- Richards’ growth function 
+
+        norm_st=st/np.full(len(st), st[Tr]) # calculate normalized growth (divide by stock at Tr)
+
+        #growth
+        gr_r=np.diff(st) #calculate growth rate i.e. derivative
+        norm_gr_r=np.diff(norm_st) #normalized growth rate i.e. relative to 1 unit sequestered
+        #add zero for yr o
+        gr_r=np.insert(gr_r, 0, 0) 
+        norm_gr_r=np.insert(norm_gr_r, 0, 0) 
+
+        #set to 0 from yr of harvest on
+        for arr in [st,norm_st,gr_r,norm_gr_r]:
+            arr[Th:]=0
+            
+            
+        norm_gr_r[int(Th/tstep):] = 0 # 0 growth after harvesting
+        norm_growth=norm_gr_r/np.trapz(norm_gr_r) #growth normalized to 1 (i.e. assumes carbon neutrality)
+        return norm_growth
+        #~return norm_gr_r
 
 class WoodDecay(object): 
     """Class containing methods to estimate wood decay rate"""
