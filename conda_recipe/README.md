@@ -2,17 +2,16 @@
 
 Just followed [conda tutorial](https://conda.io/docs/user-guide/tutorials/build-pkgs-skeleton.html#before-you-start). 
 
-After uploading temporalis on PyPI (just run `python setup.py sdist upload -r <server>` with server `pypitest` or `pypitest`) used
+After uploading temporalis on PyPI (just run `python setup.py sdist upload -r <server>` with server `pypitest` or `pypitest`) `cd` this folder (i.e. `conda_recipe`) , del the `bw2temporalis` folder and run
 
 ```
-conda skeleton pypi bw2temporalis --output-dir <filepath_of_written_recipe>
+conda skeleton pypi bw2temporalis
 ```
 
-to create yaml file which was slighlity modified (added `noarch: python` in `build`). And added `bld.bat` `build.sh` in the folder to get the the conda build recipe. 
+to create `bwtemmporalis/meta.yaml` file.  Add the `bld.bat` `build.sh` files in the folder to get the the conda build recipe. 
 
-Every new build just update the  necessary info on the `meta.yaml` i.e. `version` and `hash_value` (just get SHA256 values in the `tar.gz` from the [pypi warehouse](https://pypi.org/project/bw2temporalis/#files))
 
-With the the conda build recipe just cd to this folder (i.e. `conda_recipe`) and run 
+With the the conda build recipe just cd run 
 
 ```
 conda-build bw2temporalis --output-folder <filepath_of_temporalis_build_file>
@@ -29,4 +28,15 @@ make sure to set
 conda config --set anaconda_upload yes
 ```
 
-so every build automatically upload the package
+so every build automatically upload to anaconda several built packages
+
+
+P.S: faster way to upload several 
+
+```
+In [5]: import os
+   ...: for root, dirs, files in os.walk(<folder_with_all_built_packages>):
+   ...:     for file in files:
+   ...:         if file.endswith(".tar.bz2"):
+   ...:              os.system('anaconda upload {}'.format(os.path.join(root, file)))
+```

@@ -1,8 +1,8 @@
 {% set name = "bw2temporalis" %}
-{% set version = "0.9.2" %}
+{% set version = "1.0rc3" %}
 {% set file_ext = "tar.gz" %}
 {% set hash_type = "sha256" %}
-{% set hash_value = "157d570093feb9366482b972540b8af9ec171015cd6ec0c442ec3a131dfe4de9" %}
+{% set hash_value = "7f79c3c351636edbf82182399185868f047fc3917c5b20061f8e17be4bf2a43e" %}
 
 package:
   name: '{{ name|lower }}'
@@ -14,48 +14,42 @@ source:
   '{{ hash_type }}': '{{ hash_value }}'
 
 build:
-  noarch: python
   number: 0
+  noarch: python
   script: python setup.py install --single-version-externally-managed --record=record.txt
 
 requirements:
   host:
     - python
     - setuptools
-    - arrow
-    - eight
-    - brightway2
-    - bw2analyzer
-    - bw2calc >=0.11
-    - bw2data >=0.12
-    - bw2speedups >=2.0
-    - numexpr
-    - numpy
+    - brightway2 >=2.1.1
+    - bw2data >=3.0
+    - bw2calc
+    - bw2io >=RC3
+    - bw2speedups >=2.2
+    - numpy >=1.6
     - scipy
-    - stats_arrays
+    - numexpr
   run:
     - python
-    - arrow
-    - eight
-    - brightway2
-    - bw2analyzer
-    - bw2calc >=0.11
-    - bw2data >=0.12
-    - bw2speedups >=2.0
-    - numexpr
-    - numpy
+    - brightway2 >=2.1.1
+    - bw2data >=3.0
+    - bw2calc
+    - bw2io >=RC3
+    - bw2speedups >=2.2
+    - numpy >=1.6
     - scipy
-    - stats_arrays
+    - numexpr
 
 test:
   imports:
     - bw2temporalis
-    - bw2temporalis.cofire
+    - bw2temporalis.dyn_methods
     - bw2temporalis.examples
     - bw2temporalis.tests
 
 about:
-  home: https://bitbucket.org/cmutel/brightway2-temporalis
+  home: https://bitbucket.org/cardosan/brightway2-temporalis
   license: BSD License
   license_family: BSD
   license_file: ''
