@@ -71,20 +71,19 @@ Dynamic characterization factors are realized with pure python functions, e.g.
 
 .. code-block:: python
 
-    def silly_random_cf(datetime):
+    def silly_random_cf(passed_datetime):
         import random
         return random.random()
 
-    def increasing_co2_importance(datetime):
+    def increasing_co2_importance(passed_datetime):
         """Importance of CO2 doubles every twenty years from 2010"""
         CF = 1.
-        dt = arrow.get(datetime)
-        cutoff = arrow.get(2010, 1, 1)
-        return max(1, 2 ** ((dt - cutoff).days / 365.24 / 20) * CF)
+        cutoff = datetime.datetime(2010, 1, 1)
+        return max(1, 2 ** ((passed_datetime - cutoff).days / 365.24 / 20) * CF)
 
-    def days_since_best_movie_evar(datetime):
+    def days_since_best_movie_evar(passed_datetime):
         """http://en.wikipedia.org/wiki/Transformers:_Dark_of_the_Moon"""
-        return (arrow.get(dt) - arrow.get(2011, 6, 23)).days
+        return (passed_datetime - datetime.datetime(2011, 6, 23)).days
 
 However, there are some things to bear in mind with dynamic characterization functions:
 
@@ -95,12 +94,12 @@ However, there are some things to bear in mind with dynamic characterization fun
 .. code-block:: python
 
     {
-        ("omg", "wtf-bbq"): """def some_func(datetime):
-    import arrow
-    return (arrow.get(datetime) - arrow.get(2011, 6, 23)).days"""
+        ("my", "function"): """def some_func(datetime):
+    from datetime import timedelta
+    datetime.datetime.now() + timedelta(100)"""
     }
 
-This can be a bit confusing. See `the examples <https://bitbucket.org/cardosan/brightway2-temporalis/src/default/bw2temporalis/examples/ia.py?at=default&fileviewer=file-view-default#cl-80>`__ for a real-world implementation.
+This can be a bit confusing. See `the examples <https://bitbucket.org/cardosan/brightway2-temporalis/src/default/bw2temporalis/examples/ia.py?at=default&fileviewer=file-view-default#cl-80>`__ and the built-in `climate functions <https://bitbucket.org/cardosan/brightway2-temporalis/src/502f0ebc57025f6cbf8671e07687dc71dc73dfcc/bw2temporalis/dyn_methods/method_creation.py?at=default&fileviewer=file-view-default#method_creation.py-16>`_ for a real-world implementation.
 
 These function strings will be executed using ``exec``. Don't accept dynamic characterization function code from strange men in dark alleyways.
 

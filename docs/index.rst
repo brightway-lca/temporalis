@@ -20,19 +20,29 @@ However, it has the following limitations:
 * Inventory datasets cannot change their inputs as a function of time (i.e. are time invariant). This limitation is necessary for the graph traversal to converge.
 * Exchanges must be linear, as in normal matrix-based LCA.
 
-The methodology behind Temporalis is explained in detail in the article `Temporalis, a generic method and tool for dynamic Life Cycle Assessment` (under review). `This repo <https://github.com/cardosan/dLCA>`_ contains the jupyter notebooks used in the paper with several real usage examples.
+The article `Temporalis, a generic method for dynamic Life Cycle Assessment` (which is unfortunately still under review....) explains very nicely the methodology behind the software. `This repo <https://github.com/cardosan/dLCA>`_ contains the jupyter notebooks with the analysis performed with some nice real usage examples of the software.
 
-.. ~See also the example ipython notebook (`nbviewer <http://nbviewer.ipython.org/url/brightwaylca.org/examples/brightway2-temporalis.ipynb>`_, `html <https://brightwaylca.org/examples/brightway2-temporalis.html>`_) for a real usage example.
-
-
+See also the demonstration notebooks (`1 <https://bitbucket.org/cardosan/brightway2-temporalis/src/502f0ebc57025f6cbf8671e07687dc71dc73dfcc/docs/Temporalis%20demonstration.ipynb?at=default&fileviewer=notebook-viewer%3Anbviewer>`_,  `2 <https://bitbucket.org/cardosan/brightway2-temporalis/src/502f0ebc57025f6cbf8671e07687dc71dc73dfcc/docs/Temporalis%20demonstration%20Ecoinvent%20linking.ipynb?at=default&fileviewer=notebook-viewer%3Anbviewer>`_) and the `examples <https://bitbucket.org/cardosan/brightway2-temporalis/src/502f0ebc57025f6cbf8671e07687dc71dc73dfcc/bw2temporalis/examples/?at=default>`_.
 
 Installation
 ============
-Temporalis can be installed via pip from `PyPI <https://pypi.python.org/pypi/bw2temporalis>`_ .
+The best way to install Temporalis is by using `conda <https://conda.io/docs/index.html>`_
 
-```
-pip install bw2temporalis
-```
+The safest is to first `install brightway2 <https://docs.brightwaylca.org/installation.html>`_ and within the same conda environment run
+
+.. code-block:: bash
+
+    conda install -c cardosan bw2temporalis
+
+You can also install directly Temporalis as above, also its dependencies are installed
+
+
+Temporalis can be installed also via pip from `PyPI <https://pypi.python.org/pypi/bw2temporalis>`_ .
+
+.. code-block:: bash
+
+    pip install bw2temporalis
+
 
 which will also install all its dependencies
 
@@ -50,7 +60,7 @@ BSD 3-clause. See the file `LICENSE.txt
 Additional Resources
 ====================
 
-Temporalis is a package extension of the advanced life cycle assessment framework Brightway2, here you can find some info about it:
+Temporalis is a package extension of the advanced life cycle assessment framework Brightway2 which you should to use it. Here you can further info about it:
 
 - https://bitbucket.org/cmutel/brightway2 (Brightway2 repo)
 - https://brightwaylca.org/ (Brightway2 online documentation)
