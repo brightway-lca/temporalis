@@ -32,7 +32,7 @@ The safest is to first `install brightway2 <https://docs.brightwaylca.org/instal
 
 .. code-block:: bash
 
-    conda install -c cardosan bw2temporalis
+    conda install -y -c conda-forge -c cmutel -c haasad -c cardosan bw2temporalis
 
 You can also install directly Temporalis as above, also its dependencies are installed
 
