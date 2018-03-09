@@ -30,14 +30,14 @@ The best way to install Temporalis is by using `conda <https://conda.io/docs/ind
 
 The safest is to first `install brightway2 <https://docs.brightwaylca.org/installation.html>`_ and within the same conda environment run
 
-.. code-block:: bash
+.. ~.. code-block:: bash
+.. ~
+.. ~    conda install -y -c conda-forge -c cmutel -c haasad -c cardosan bw2temporalis
+.. ~
+.. ~You can also install directly Temporalis as above, also its dependencies are installed
 
-    conda install -y -c conda-forge -c cmutel -c haasad -c cardosan bw2temporalis
-
-You can also install directly Temporalis as above, also its dependencies are installed
-
-
-Temporalis can be installed also via pip from `PyPI <https://pypi.python.org/pypi/bw2temporalis>`_ .
+.. ~
+.. ~Temporalis can be installed also via pip from `PyPI <https://pypi.python.org/pypi/bw2temporalis>`_ .
 
 .. code-block:: bash
 
