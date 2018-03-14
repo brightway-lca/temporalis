@@ -1,5 +1,5 @@
 Temporalis: an open source software for dynamic LCA
-***************************************************
+********************************************************
 
 An open source library for the `Brightway2 LCA calculation framework <http://brightwaylca.org/>`_ that allows for a specific kind of dynamic life cycle assessments. 
 
