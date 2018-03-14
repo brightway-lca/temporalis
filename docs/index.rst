@@ -99,4 +99,5 @@ Table of contents
    traversal
    formats
    gotchas
+   issues
    technical
