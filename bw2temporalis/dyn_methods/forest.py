@@ -56,12 +56,12 @@ def get_static_forest_keys():
             #~'_Wood construction waste, 20% water on dry mass basis',
             #~]
     estelle=[
-    #'_Allocation correction, spruce, 20% water on dry basis',
  #'_Aqueous microporous paint for wood, SIPEV/FR S_26082014',
  #'_Aqueous phase coating, SIPEV/FR S_20140527',
   #'_Polyurethane glue, Bostik, at plant/FR S_20140627',
  #'_Transport, lorry >28t, fleet average/CH S_litre',
  #'Polyethylene, HDPE, granulate, at plant/RER',
+ #'_Allocation correction, spruce, 20% water on dry basis',
 
  '_Beech industrial roundwood, 80% water on dry mass basis, at forest road/FR S_20120830',
  '_Douglas-fir industrial roundwood, 65% water on dry mass basis, at forest road/FR S_20120830',
