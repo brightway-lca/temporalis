@@ -413,8 +413,8 @@ Args:
                     warnings.warn("The old format for `temporal distribution` is deprecated, now must be a `TemporalDistribution` object instead of a nested list of tuples. The applied convertion might be incorrect in the exchange from {} to {}".format(exc['input'],exc['output']),DeprecationWarning)
             else:
                 raise ValueError("incorrect data format for temporal distribution` from: {} to {}".format(exc['input'],exc['output']))
-        if not np.isclose(td.total,exc['amount']):
-            raise ValueError("Unbalanced exchanges from {} to {}. Make sure that total of `temporal distribution` is the same of `amount`".format(exc['input'],exc['output']))           
+        if not np.isclose(td.total,exc['amount'], rtol=0.0001):
+            raise ValueError("Unbalanced exchanges from {} to {}.  Make sure that total of `temporal distribution` (which is {}) is the same of `amount` ({})".format(exc['input'],exc['output'],td.total,exc['amount']))           
         return td* sign
 
     def _discard_node(self, node, amount):

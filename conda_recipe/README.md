@@ -8,7 +8,7 @@ After uploading temporalis on PyPI (just run `python setup.py sdist upload -r <s
 conda skeleton pypi bw2temporalis
 ```
 
-to create `bwtemmporalis/meta.yaml` file.  Add the `bld.bat` `build.sh` files in the folder to get the the conda build recipe. 
+to create `bwtemporalis/meta.yaml` file.  Add the `bld.bat` `build.sh` files in the folder to get the the conda build recipe. 
 
 
 With the the conda build recipe just cd run 
