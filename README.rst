@@ -43,7 +43,7 @@ which will also install all its dependencies
 Documentation and examples
 ==========================
 
-The online documentation <http://temporalis.readthedocs.io/en/latest/>`_ explain the functioning of the software and how to use it.
+The `online documentation <http://temporalis.readthedocs.io/en/latest/>`_ explain the functioning of the software and how to use it.
 
 The article `Temporalis, a generic method for dynamic Life Cycle Assessment` (which is unfortunately still under review....) explains very nicely the methodology behind the software. `This repo <https://github.com/cardosan/dLCA>`_ contains the jupyter notebooks with the analysis performed with some nice real usage examples of the software.
 
