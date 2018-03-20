@@ -1,17 +1,56 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function, unicode_literals
 from eight import *
-
-"""cofire is a library built by Greg Schively. It can be downloaded from https://github.com/gschivley/co-fire.
-
-We wrap this library to provide dynamic LCIA methods that fit the Temporalis data model."""
-
+import pickle
+from .metrics import AGTP,RadiativeForcing
+import numpy as np
 from ..dynamic_ia_methods import DynamicIAMethod
-from .constants import *
 from bw2data import config, Database
 import itertools
+import os
 
-#TODO: update AGTP
+
+CONSTANTS_FILEPATH=os.path.join(os.path.dirname(__file__), 'constants.pkl')
+
+def _create_constants():
+    """create the climate constants and save to pickle"""
+    constants={}
+
+    #create AGTP timeline (add other gasses)
+    constants["co2_agtp_ar5_td"]= AGTP("co2", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000)
+    constants["co2bio_agtp_ar5_td"]= AGTP("co2_biogenic", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000)
+    constants["ch4_agtp_ar5_td"]= AGTP("ch4", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000)
+    constants["ch4_fossil_agtp_ar5_td"]= AGTP("ch4_fossil", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000)
+    constants["n2o_agtp_ar5_td"]= AGTP("n2o", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000)
+    constants["sf6_agtp_ar5_td"]= AGTP("sf6", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000)
+    constants["co2_agtp_base_td"]= AGTP("co2", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000, "op_base")
+    constants["co2bio_agtp_base_td"]= AGTP("co2_biogenic", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000, "op_base")
+    constants["ch4_agtp_base_td"]= AGTP("ch4", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000, "op_base")
+    constants["ch4_fossil_agtp_base_td"]= AGTP("ch4_fossil", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000, "op_base")
+    constants["n2o_agtp_base_td"]= AGTP("n2o", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000, "op_base")
+    constants["sf6_agtp_base_td"]= AGTP("sf6", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000, "op_base")
+    constants["co2_agtp_low_td"]= AGTP("co2", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000, "op_low")
+    constants["co2bio_agtp_low_td"]= AGTP("co2_biogenic", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000, "op_low")
+    constants["ch4_agtp_low_td"]= AGTP("ch4", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000, "op_low")
+    constants["ch4_fossil_agtp_low_td"]= AGTP("ch4_fossil", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000, "op_low")
+    constants["n2o_agtp_low_td"]= AGTP("n2o", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000, "op_low")
+    constants["sf6_agtp_low_td"]= AGTP("sf6", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000, "op_low")
+    constants["co2_agtp_high_td"]= AGTP("co2", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000, "op_high")
+    constants["co2bio_agtp_high_td"]= AGTP("co2_biogenic", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000, "op_high")
+    constants["ch4_agtp_high_td"]= AGTP("ch4", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000, "op_high")
+    constants["ch4_fossil_agtp_high_td"]= AGTP("ch4_fossil", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000, "op_high")
+    constants["n2o_agtp_high_td"]= AGTP("n2o", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000, "op_high")
+    constants["sf6_agtp_high_td"]= AGTP("sf6", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000, "op_high")
+    #create RF timeline (add other gasses)
+    constants["co2_rf_td"]= RadiativeForcing("co2", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000)
+    constants["co2bio_rf_td"]= RadiativeForcing("co2_biogenic", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000)
+    constants["ch4_rf_td"]= RadiativeForcing("ch4", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000)
+    constants["ch4_fossil_rf_td"]= RadiativeForcing("ch4_fossil", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000)
+    constants["n2o_rf_td"]= RadiativeForcing("n2o", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000)
+    constants["sf6_rf_td"]= RadiativeForcing("sf6", np.array((1.,)), np.array((0,),dtype=('timedelta64[Y]')), 'Y', 1000)
+    
+    #save to pickle
+    pickle.dump(constants, open(CONSTANTS_FILEPATH, "wb" ) )
 
 def create_climate_methods():
     
@@ -20,6 +59,9 @@ def create_climate_methods():
     
     All the work is based on the library ghgforcing built by Greg Schively. It can be downloaded from https://github.com/gschivley/ghgforcing.
     """
+    
+    #first we create the constants
+    const=_create_constants()
     
     bio = Database(config.biosphere)
     
@@ -53,14 +95,15 @@ def create_climate_methods():
              "agtp_high":"GTP OP high",
              "rf":"RadiativeForcing",
              }
-                 
+                    
     function="""def {0}_{1}_function(datetime):
-                    from bw2temporalis.dyn_methods.constants import {0}_{1}_td
+                    import pickle
                     import numpy as np
                     from datetime import timedelta
                     import collections
+                    constants = pickle.load( open(\"{2}\", "rb" ) )
                     return_tuple = collections.namedtuple('return_tuple', ['dt', 'amount'])
-                    return [return_tuple(d,v) for d,v in zip((datetime+{0}_{1}_td.times.astype(timedelta)),{0}_{1}_td.values)]"""
+                    return [return_tuple(d,v) for d,v in zip((datetime+constants[\"{0}_{1}_td\"].times.astype(timedelta)),constants[\"{0}_{1}_td\"].values)]"""
 
     print('Dynamic IA Methods written:')
     for met_func,met_name in dyn_met.items():
@@ -72,11 +115,11 @@ def create_climate_methods():
         for gas,gas_bio in gas_name_in_biosphere.items():
             if gas=='co2bio':
                 #need again to convert datetime back to numpy
-                cf_data[gas_bio] =function.format(gas,met_func)
+                cf_data[gas_bio] =function.format(gas,met_func,CONSTANTS_FILEPATH)
             else:
                 for gas_n in gas_bio:
                     for bio_key in [ds.key for ds in bio if ds['name']==gas_n]: 
-                        cf_data[bio_key] = function.format(gas,met_func)                            
+                        cf_data[bio_key] = function.format(gas,met_func,CONSTANTS_FILEPATH)                            
         method.register(
             from_function="create_climate_methods",
             library="dyn_methods"

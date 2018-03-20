@@ -1,16 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function, unicode_literals
 from eight import *
-
+import os
 import numpy as np
 from ..dynamic_lca import DynamicLCA
-from .constants import co2_agtp_ar5_td,co2_rf_td
+import pickle
 
-# from .dynamic_ia_methods import dynamic_methods, DynamicIAMethod
-# from .temporal_distribution import TemporalDistribution
-# from .timeline import Timeline, data_point
-
-
+CONSTANTS = pickle.load( open(os.path.join(os.path.dirname(__file__), 'constants.pkl'), "rb" ) )
 
 def time_dependent_LCA(demand,dynIAM='GWP',t0=None,TH=100,DynamicLCA_kwargs={},characterize_dynamic_kwargs={}):
     """calculate dynamic GWP or GTP for the functional unit and the time horizon indicated following the approach of Levausseur (2010, doi: 10.1021/es9030003).
@@ -31,9 +27,13 @@ Args:
 
     """
 
-
-    dyn_m={'GWP':"RadiativeForcing",'GTP':'AGTP'}
-    assert dynIAM in dyn_m, "DynamicIAMethod not present"
+    dyn_m={"GWP":"RadiativeForcing",
+           "GTP":"AGTP", #default is ar5
+           "GTP base":"AGTP OP base",
+           "GTP low":"AGTP OP low",
+           "GTP high":"AGTP OP high",
+           }
+    assert dynIAM in dyn_m, "DynamicIAMethod not present, run `create_climate_methods` first"
 
     #set default start and calculate year of TH end
     th_zero=np.datetime64('now') if t0 is None else np.datetime64(t0)
@@ -45,14 +45,20 @@ Args:
                       **DynamicLCA_kwargs
                      )
     dyn_lca= dlca.calculate().characterize_dynamic(dyn_m[dynIAM],cumulative=False, **characterize_dynamic_kwargs)
-    #~dyn_lca=([int(x) for x in dyn_lca[0]],dyn_lca[1]) #convert years to int, but better not to be consistent with resolution less than years
+    #dyn_lca=([int(x) for x in dyn_lca[0]],dyn_lca[1]) #convert years to int, but better not to be consistent with resolution less than years
 
     #pick denominator based on metric chosen
     if dynIAM=='GWP':
-        co2_imp=co2_rf_td
-    if dynIAM=='GTP':
-        co2_imp=co2_agtp_ar5_td
-    
+        co2_imp=CONSTANTS['co2_rf_td']
+    elif dynIAM=='GTP':
+        co2_imp=CONSTANTS['co2_agtp_ar5_td']
+    elif dynIAM=='GTP base':
+        co2_imp=CONSTANTS['co2_agtp_base_td']
+    elif dynIAM=='GTP low':
+        co2_imp=CONSTANTS['co2_agtp_low_td']
+    elif dynIAM=='GTP high':
+        co2_imp=CONSTANTS['co2_agtp_high_td']
+        
     #calculate lenght of th from first emission occuring
     length=len([int(yr) for yr in dyn_lca[0] if int(yr) <= th_end])
 
