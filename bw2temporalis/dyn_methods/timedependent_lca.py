@@ -32,7 +32,12 @@ Args:
     """
 
 
-    dyn_m={'GWP':"RadiativeForcing",'GTP':'AGTP'}
+    dyn_m={"GWP":"RadiativeForcing"
+           "GTP":"AGTP", #default is ar5
+           "GTP base":"AGTP OP base",
+           "GTP low":"AGTP OP low",
+           "GTP high":"AGTP OP high",
+           }
     assert dynIAM in dyn_m, "DynamicIAMethod not present"
 
     #set default start and calculate year of TH end
@@ -50,9 +55,15 @@ Args:
     #pick denominator based on metric chosen
     if dynIAM=='GWP':
         co2_imp=co2_rf_td
-    if dynIAM=='GTP':
+    elif dynIAM=='GTP':
         co2_imp=co2_agtp_ar5_td
-    
+    elif dynIAM=='GTP base':
+        co2_imp=co2_agtp_base_td
+    elif dynIAM=='GTP low':
+        co2_imp=co2_agtp_low_td
+    elif dynIAM=='GTP high':
+        co2_imp=co2_agtp_high_td
+        
     #calculate lenght of th from first emission occuring
     length=len([int(yr) for yr in dyn_lca[0] if int(yr) <= th_end])
 

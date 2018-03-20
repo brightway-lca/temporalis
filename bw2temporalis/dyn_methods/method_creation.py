@@ -47,10 +47,10 @@ def create_climate_methods():
             
     }   
     
-    dyn_met={"agtp_ar5":"AGTP",
-             "agtp_base":"GTP OP base",
-             "agtp_low":"GTP OP low",
-             "agtp_high":"GTP OP high",
+    dyn_met={"agtp_ar5":"AGTP", #default is ar5
+             "agtp_base":"AGTP OP base",
+             "agtp_low":"AGTP OP low",
+             "agtp_high":"AGTP OP high",
              "rf":"RadiativeForcing",
              }
                  
