@@ -210,52 +210,47 @@ Args:
             self.edges.add(ed)
             self.loops[ed]+=1
             
-            #dict with all edges of this node
-            dyn_edges={}
+            #defaultdict with all edges of this node (can have multiple exchanges with same input/output so use default dict with list TDs as values)
+            dyn_edges=collections.defaultdict(list)
             #loop dynamic_technosphere edges for node
             for exc in node.exchanges():
                 #deal with technophsere and substitution exchanges
                 if exc.get("type") in ["technosphere",'substitution']:
                     if self.log:
                         self.log.info("._iterate:edge: " + pprint.pformat(exc))
-                    #Have to be careful here, because can have
-                    #multiple exchanges with same input/output
-                    #Sum up multiple edges with same input, if present
-                    dyn_edges[exc['input']] = (
-                    self._get_temporal_distribution(exc) +
-                    dyn_edges.get(exc['input'], 0))
+                    dyn_edges[exc['input']].append(self._get_temporal_distribution(exc))
                     
                 #deal with coproducts
                 if exc.get('type')=='production' and exc.get('input')!=ed[1]:
                     if self.log:
                         self.log.info("._iterate:edge: " + pprint.pformat(exc))
-                    #Have to be careful here, because can have
-                    #multiple exchanges with same input/output
-                    #Sum up multiple edges with same input, if present
-                    dyn_edges[exc['input']] = (
-                    self._get_temporal_distribution(exc) +
-                    dyn_edges.get(exc['input'], 0))
+                    dyn_edges[exc['input']].append(self._get_temporal_distribution(exc))
+
 
             #GIU: test if it is necessary all this or just loop all of them
-            for edge,edge_td in dyn_edges.items():
-                #Recalculate edge TD convoluting its TD with TD of the node consuming it (ds)
-                #return a new_td with timedelta as times
-                new_td=self._calculate_new_td(edge_td,td)
+            for edge,edge_exchanges in dyn_edges.items():
+                #need index to add duplicates exchanges with their index
+                for i,edge_td in enumerate(edge_exchanges):
                 
-                # Calculate lca and discard if node impact is lower than cutoff
-                if self._discard_node(
-                        edge,
-                        new_td.total):
-                    continue
+                    #Recalculate edge TD convoluting its TD with TD of the node consuming it (ds)
+                    #return a new_td with timedelta as times
+                    new_td=self._calculate_new_td(edge_td,td)
                 
-                #else add to the heap the ds of this exchange with the new TD
-                heappush(self.heap, (
-                    abs(1 / self.lca.score),
-                    (ed[1],edge),
-                    dt,
-                    new_td,
-                    ed_tag  #with tag          
-                ))
+                    # Calculate lca and discard if node impact is lower than cutoff
+                    if self._discard_node(
+                            edge,
+                            new_td.total):
+                        continue
+                
+                    #else add to the heap the ds of this exchange with the new TD
+                    heappush(self.heap, (
+                        abs(1 / self.lca.score),
+                        (ed[1],edge,i),
+                        dt,
+                        new_td,
+                        ed_tag  #with tag          
+                    ))
+                
             self.calc_number += 1
 
     def _add_biosphere_flows(self, edge, tech_td,tag): #with tag
@@ -413,7 +408,7 @@ Args:
                     warnings.warn("The old format for `temporal distribution` is deprecated, now must be a `TemporalDistribution` object instead of a nested list of tuples. The applied convertion might be incorrect in the exchange from {} to {}".format(exc['input'],exc['output']),DeprecationWarning)
             else:
                 raise ValueError("incorrect data format for temporal distribution` from: {} to {}".format(exc['input'],exc['output']))
-        if not np.isclose(td.total,exc['amount']):
+        if not np.isclose(td.total,exc['amount'], rtol=0.0001):
             raise ValueError("Unbalanced exchanges from {} to {}. Make sure that total of `temporal distribution` is the same of `amount`".format(exc['input'],exc['output']))           
         return td* sign
 
