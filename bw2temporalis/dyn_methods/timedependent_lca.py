@@ -6,7 +6,10 @@ import numpy as np
 from ..dynamic_lca import DynamicLCA
 import pickle
 
-CONSTANTS = pickle.load( open(os.path.join(os.path.dirname(__file__), 'constants.pkl'), "rb" ) )
+# ~CONSTANTS_PATH = pickle.load( open(os.path.join(os.path.dirname(__file__), 'constants.pkl'), "rb" ) )
+
+CONSTANTS_PATH = os.path.join(os.path.dirname(__file__), 'constants.pkl')
+
 
 def time_dependent_LCA(demand,dynIAM='GWP',t0=None,TH=100,DynamicLCA_kwargs={},characterize_dynamic_kwargs={}):
     """calculate dynamic GWP or GTP for the functional unit and the time horizon indicated following the approach of Levausseur (2010, doi: 10.1021/es9030003).
@@ -26,14 +29,15 @@ Args:
     * *characterize_dynamic_kwargs* (dict, default=None): optional arguments to be passed for characterize_dynamic.
 
     """
-
+    CONSTANTS=pickle.load( open( CONSTANTS_PATH , "rb" ) )
+    
     dyn_m={"GWP":"RadiativeForcing",
            "GTP":"AGTP", #default is ar5
            "GTP base":"AGTP OP base",
            "GTP low":"AGTP OP low",
            "GTP high":"AGTP OP high",
            }
-    assert dynIAM in dyn_m, "DynamicIAMethod not present, run `create_climate_methods` first"
+    assert dynIAM in dyn_m, "DynamicIAMethod not present, make sure name is correct and `create_climate_methods` was run"
 
     #set default start and calculate year of TH end
     th_zero=np.datetime64('now') if t0 is None else np.datetime64(t0)
