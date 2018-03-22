@@ -98,6 +98,7 @@ Table of contents
    strategy
    traversal
    formats
-   gotchas
    issues
    technical
+.. ~   gotchas
+
