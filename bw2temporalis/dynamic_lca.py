@@ -120,7 +120,8 @@ Args:
                 ),
                 'Functional unit' #with tag
             )
-        ) if self.lca.score!=0 else self.timeline.add(self.t0.astype(datetime.datetime) , None, None,0) #deal with demand with no impact (doing so does not return error in LCIA)
+        ) #if self.lca.score!=0 else self.timeline.add(self.t0.astype(datetime.datetime) , None, None,0) #deal with demand with no impact (doing so does not return error in LCIA)
+        #TODO: the part commented out above was needed for `MultiDynamicLCA`, in commits `traverse also when total score is 0` this has been deleted, check if `MultiDynamicLCA` works fine or is affected
 
         while self.heap:
             if self.calc_number >= self.max_calc_number:
@@ -184,7 +185,7 @@ Args:
                 
                 #else add to the heap the ds of this exchange with the new TD
                 heappush(self.heap, (
-                    abs(1 / self.lca.score),  
+                    abs(1 / self.lca.score) if self.lca.score !=0 else 0,  #deal with situations where the overal LCA score of the FU assessed is 0
                     (ed[1],key),
                     dt,
                     new_td,
@@ -244,7 +245,7 @@ Args:
                 
                     #else add to the heap the ds of this exchange with the new TD
                     heappush(self.heap, (
-                        abs(1 / self.lca.score),
+                        abs(1 / self.lca.score) if self.lca.score !=0 else 0,  #deal with exchanges with 0 impact
                         (ed[1],edge,i),
                         dt,
                         new_td,
