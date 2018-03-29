@@ -52,16 +52,21 @@ def _create_constants():
     #save to pickle
     pickle.dump(constants, open(CONSTANTS_FILEPATH, "wb" ) )
 
-def create_climate_methods():
+def create_climate_methods(overwrite_constants=False):
     
     """Create the dynamic LCIA methods for AGTP and Radiative Forcing that are calculated every year over 500 years for each GHG emissions.
     Gasses from custom biosphere database can be added simpy adding their names to `gas_name_in_biosphere`
     
     All the work is based on the library ghgforcing built by Greg Schively. It can be downloaded from https://github.com/gschivley/ghgforcing.
+    
+    Args:
+        * *overwrite_constants* (Boolean, default=False): Recreate clilmate constants even if the `constants.pkl` file already exists.
+    
     """
     
     #first we create the constants
-    const=_create_constants()
+    if not os.path.isfile(CONSTANTS_FILEPATH) or overwrite_constants:
+        const=_create_constants()
     
     bio = Database(config.biosphere)
     
