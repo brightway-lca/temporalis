@@ -10,7 +10,7 @@ import itertools
 import os
 
 
-CONSTANTS_FILEPATH=os.path.join(os.path.dirname(__file__), 'constants.pkl')
+CONSTANTS_FILEPATH=os.path.join(os.path.dirname(__file__), 'constants.pkl').replace("\\", "\\\\")
 
 def _create_constants():
     """create the climate constants and save to pickle"""
