@@ -80,15 +80,20 @@ class ClimateMetricsTestCase(BaseTestCase):
     def test_dynamic_gwp(self):
         """test dynamic GWP"""
         self.create_db()
+                
+        co2=time_dependent_LCA({("clima", "co2"):1},dynIAM='GWP')
+        co2_b=time_dependent_LCA({("clima", "co2bio_test"):1},dynIAM='GWP')
+        ch4=time_dependent_LCA({("clima", "ch4"):1},dynIAM='GWP')
+        ch4_f=time_dependent_LCA({("clima", "ch4_fossil"):1},dynIAM='GWP')
         
-        print(time_dependent_LCA({("clima", "co2"):1},dynIAM='GWP'))
-        print(time_dependent_LCA({("clima", "co2bio_test"):1},dynIAM='GWP'))
-        print(time_dependent_LCA({("clima", "ch4"):1},dynIAM='GWP'))
-        print(time_dependent_LCA({("clima", "ch4_fossil"):1},dynIAM='GWP'))      
-        
-        self.assertTrue(np.allclose(time_dependent_LCA({("clima", "co2"):1},dynIAM='GWP'),1)) #co2 fossil
-        self.assertTrue(np.allclose(time_dependent_LCA({("clima", "co2bio_test"):1},dynIAM='GWP'),0.43,0.1)) #co2 biogenic
-        self.assertTrue(np.allclose(time_dependent_LCA({("clima", "ch4"):1},dynIAM='GWP'),28,1)) #ch4 
-        self.assertTrue(np.allclose(time_dependent_LCA({("clima", "ch4_fossil"):1},dynIAM='GWP'),29,1)) #ch4 fossil
+        print('co2:',co2)    
+        print('co2_b:',co2_b)    
+        print('ch4:',ch4)    
+        print('ch4_f:',ch4_f)    
+
+        self.assertTrue(np.allclose(co2,1,0.01)) #co2 fossil
+        self.assertTrue(np.allclose(co2_b,dynIAM='GWP'),0.43,0.1) #co2 biogenic
+        self.assertTrue(np.allclose(ch4,dynIAM='GWP'),28,1) #ch4 
+        self.assertTrue(np.allclose(ch4_f,dynIAM='GWP'),29,1) #ch4 fossil
 
         
