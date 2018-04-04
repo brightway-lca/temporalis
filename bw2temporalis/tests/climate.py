@@ -92,8 +92,8 @@ class ClimateMetricsTestCase(BaseTestCase):
         print('ch4_f:',ch4_f)    
 
         self.assertTrue(np.allclose(co2,1,0.01)) #co2 fossil
-        self.assertTrue(np.allclose(co2_b,dynIAM='GWP'),0.43,0.1) #co2 biogenic
-        self.assertTrue(np.allclose(ch4,dynIAM='GWP'),28,1) #ch4 
-        self.assertTrue(np.allclose(ch4_f,dynIAM='GWP'),29,1) #ch4 fossil
+        self.assertTrue(np.allclose(co2_b,0.43,0.1)) #co2 biogenic
+        self.assertTrue(np.allclose(ch4,28,1)) #ch4 
+        self.assertTrue(np.allclose(ch4_f,29,1)) #ch4 fossil
 
         
