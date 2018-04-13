@@ -6,7 +6,7 @@ from .temporal_distribution import TemporalDistribution
 from .timeline import Timeline
 from .dyn_methods.forest import get_static_forest_keys
 from bw2calc import LCA
-from bw2data import Database, get_activity, databases
+from bw2data import Database, get_activity, databases, Method
 from bw2data.logs import get_logger
 from heapq import heappush, heappop
 import numpy as np
@@ -69,6 +69,9 @@ Args:
         self.nodes=set()
         self.edges=set()
         
+        #take the biosphere flows that are in the CF used to add only them in the timeline
+        self._flows_in_CF=[x[0] for x in Method(self.worst_case_method).load()]+[('static_forest', 'C_biogenic')] 
+
         #self.test_datetime={}    #test for using TD,left for future (potential) development (other parts are commented out below)
         
         
@@ -304,7 +307,7 @@ Args:
                     #TODO: best to use a better container for timeline.
                     #maybe defaultdict with namedtuple as key to group amount when added 
                     #fastest, see among others here https://gist.github.com/dpifke/2244911 (I also tested)
-                    if bio_amount_scaled !=0:
+                    if bio_amount_scaled !=0 and flow in self._flows_in_CF:
                         self.timeline.add(bio_dt, flow, tag,bio_amount_scaled) #only foreground with tag
                         # self.timeline.add(bio_dt, flow, pr,bio_amount_scaled) #with background
                 
@@ -344,8 +347,10 @@ Args:
                     #deal with forest biogenic C in dynamic db
                     if exc['input']==('biosphere3', 'cc6a1abb-b123-4ca6-8f16-38209df609be') and ds in self.stat_for_keys:
                         self.timeline.add(bio_dt, ('static_forest','C_biogenic'), tag,bio_amount_scaled) # with tag
-                    else:
+                    elif exc['input'] in self._flows_in_CF:
                         self.timeline.add(bio_dt, exc['input'], tag,bio_amount_scaled) # with tag
+                    else:
+                        continue
 
             #~#test for using TD
             #~td_bio_new_test=self._calculate_bio_td_datetime_test_timeline(bio_td,tech_td)
