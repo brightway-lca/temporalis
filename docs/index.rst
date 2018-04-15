@@ -99,5 +99,5 @@ Table of contents
    traversal
    formats
    issues
-   gotchas
+   gotcha
    technical
