@@ -10,6 +10,6 @@ pipelines:
     - step:
         script: # Modify the commands below to build your repository.
           - pip install pytest pytest-cov python-coveralls numexpr
-          - pip install -U --no-deps bw2data==3.0.RC2 bw2calc bw2io==0.6RC3 bw2speedups
+          - pip install -U --no-deps bw2data==3.0.RC2 bw2calc bw2io==0.6RC3 bw2speedups peewee==2.10.2
           - pytest --cov=bw2temporalis
           - coveralls
