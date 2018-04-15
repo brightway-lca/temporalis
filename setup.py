@@ -3,7 +3,7 @@ import io
 
 setup(
     name='bw2temporalis',
-    version="1.0",
+    version="1.0.1.rc1",
     packages=[
         "bw2temporalis",
         "bw2temporalis.tests",
@@ -18,7 +18,7 @@ setup(
         "brightway2>=2.1.1",
         "bw2data>=3.0",
         "bw2calc",
-        "bw2io>=RC3",
+        "bw2io>=0.6RC3",
         "bw2speedups>=2.2",
         "numpy>=1.6",
         "scipy",
