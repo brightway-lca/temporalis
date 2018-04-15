@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="48cm" height="12cm" viewBox="95 39 954 231" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #ffffff" x="394.4" y="232.5" width="87.2" height="37"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x="394.4" y="232.5" width="87.2" height="37"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="438" y="254.9">
+      <tspan x="438" y="254.9">Landfilling</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="384.95" y="128.2" width="97.1" height="37"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x="384.95" y="128.2" width="97.1" height="37"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="433.5" y="150.6">
+      <tspan x="433.5" y="150.6">Incineration</tspan>
+    </text>
+  </g>
+  <g>
+    <ellipse style="fill: #ffffff" cx="341.018" cy="191.382" rx="38.2378" ry="18.4229"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" cx="341.018" cy="191.382" rx="38.2378" ry="18.4229"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="341.018" y="195.282">
+      <tspan x="341.018" y="195.282">CH4</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke-dasharray: 4; stroke: #000000" x1="394.4" y1="251" x2="361.449" y2="214.777"/>
+    <polygon style="fill: #000000" points="356.402,209.229 366.83,213.262 361.449,214.777 359.433,219.991 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" points="356.402,209.229 366.83,213.262 361.449,214.777 359.433,219.991 "/>
+  </g>
+  <g>
+    <ellipse style="fill: #ffffff" cx="119.4" cy="65.6229" rx="21.6" ry="18.4229"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" cx="119.4" cy="65.6229" rx="21.6" ry="18.4229"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="119.4" y="69.5229">
+      <tspan x="119.4" y="69.5229"></tspan>
+    </text>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="154" y="71">
+    <tspan x="154" y="71">Biosphere flow</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="160" y="129">
+    <tspan x="160" y="129">Process</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="98.7" y="105.5" width="41.6" height="37"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x="98.7" y="105.5" width="41.6" height="37"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="119.5" y="127.9">
+      <tspan x="119.5" y="127.9"></tspan>
+    </text>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="157.1" y="193.7">
+    <tspan x="157.1" y="193.7">Avoided Process</tspan>
+  </text>
+  <g>
+    <rect style="fill: #d8e5e5" x="95.8" y="170.2" width="41.6" height="37"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x="95.8" y="170.2" width="41.6" height="37"/>
+    <text font-size="12.8" style="fill: #d8e5e5;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="116.6" y="192.6">
+      <tspan x="116.6" y="192.6"></tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #d8e5e5" x="386.7" y="40.2" width="93.8" height="53"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x="386.7" y="40.2" width="93.8" height="53"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="433.6" y="62.6">
+      <tspan x="433.6" y="62.6">Energy</tspan>
+      <tspan x="433.6" y="78.6">production </tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="508.25" y="180.25" width="56.75" height="53"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x="508.25" y="180.25" width="56.75" height="53"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="536.625" y="202.65">
+      <tspan x="536.625" y="202.65">Wood</tspan>
+      <tspan x="536.625" y="218.65">Use</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="604.8" y="188.2" width="97.1" height="37"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x="604.8" y="188.2" width="97.1" height="37"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="653.35" y="210.6">
+      <tspan x="653.35" y="210.6">Sawmilling</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="770.8" y="188.2" width="97.1" height="37"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x="770.8" y="188.2" width="97.1" height="37"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="819.35" y="210.6">
+      <tspan x="819.35" y="210.6">Transport</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="950.244" y="180.2" width="97.1" height="53"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x="950.244" y="180.2" width="97.1" height="53"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="998.794" y="202.6">
+      <tspan x="998.794" y="202.6">Forestry</tspan>
+      <tspan x="998.794" y="218.6">(ecoinvent)</tspan>
+    </text>
+  </g>
+  <g>
+    <ellipse style="fill: #ffffff" cx="998.794" cy="104.206" rx="49.4762" ry="28.578"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" cx="998.794" cy="104.206" rx="49.4762" ry="28.578"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="998.794" y="100.106">
+      <tspan x="998.794" y="100.106">CO2</tspan>
+      <tspan x="998.794" y="116.106">(biogenic)</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke-dasharray: 4; stroke: #000000" x1="998.794" y1="133.001" x2="998.794" y2="171.582"/>
+    <polygon style="fill: #000000" points="998.794,179.082 993.794,169.082 998.794,171.582 1003.79,169.082 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" points="998.794,179.082 993.794,169.082 998.794,171.582 1003.79,169.082 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="950.244" y1="206.7" x2="876.518" y2="206.7"/>
+    <polygon style="fill: #000000" points="869.018,206.7 879.018,201.7 876.518,206.7 879.018,211.7 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" points="869.018,206.7 879.018,201.7 876.518,206.7 879.018,211.7 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke-dasharray: 4; stroke: #000000" x1="770.8" y1="206.7" x2="710.518" y2="206.7"/>
+    <polygon style="fill: #000000" points="703.018,206.7 713.018,201.7 710.518,206.7 713.018,211.7 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" points="703.018,206.7 713.018,201.7 710.518,206.7 713.018,211.7 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="604.8" y1="206.7" x2="573.618" y2="206.739"/>
+    <polygon style="fill: #000000" points="566.118,206.749 576.112,201.736 573.618,206.739 576.124,211.736 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" points="566.118,206.749 576.112,201.736 573.618,206.739 576.124,211.736 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="508.25" y1="233.25" x2="488.773" y2="246.223"/>
+    <polygon style="fill: #000000" points="482.531,250.38 488.082,240.675 488.773,246.223 493.625,248.998 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" points="482.531,250.38 488.082,240.675 488.773,246.223 493.625,248.998 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="508.25" y1="180.25" x2="489.523" y2="169.493"/>
+    <polygon style="fill: #000000" points="483.019,165.757 494.181,166.402 489.523,169.493 489.2,175.073 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" points="483.019,165.757 494.181,166.402 489.523,169.493 489.2,175.073 "/>
+  </g>
+  <g>
+    <ellipse style="fill: #ffffff" cx="819.082" cy="144.15" rx="35.0821" ry="19.1502"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" cx="819.082" cy="144.15" rx="35.0821" ry="19.1502"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="819.082" y="148.05">
+      <tspan x="819.082" y="148.05">C02</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="819.35" y1="188.2" x2="819.254" y2="172.406"/>
+    <polygon style="fill: #000000" points="819.208,164.906 824.269,174.875 819.254,172.406 814.269,174.936 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" points="819.208,164.906 824.269,174.875 819.254,172.406 814.269,174.936 "/>
+  </g>
+  <g>
+    <ellipse style="fill: #ffffff" cx="653.35" cy="142.35" rx="35.0821" ry="19.1502"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" cx="653.35" cy="142.35" rx="35.0821" ry="19.1502"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="653.35" y="146.25">
+      <tspan x="653.35" y="146.25">C02</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="653.35" y1="188.2" x2="653.35" y2="170.118"/>
+    <polygon style="fill: #000000" points="653.35,162.618 658.35,172.618 653.35,170.118 648.35,172.618 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" points="653.35,162.618 658.35,172.618 653.35,170.118 648.35,172.618 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="433.5" y1="128.2" x2="433.575" y2="101.818"/>
+    <polygon style="fill: #000000" points="433.597,94.318 438.568,104.332 433.575,101.818 428.568,104.304 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" points="433.597,94.318 438.568,104.332 433.575,101.818 428.568,104.304 "/>
+  </g>
+  <g>
+    <ellipse style="fill: #ffffff" cx="558.882" cy="66.7" rx="35.0821" ry="19.1502"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" cx="558.882" cy="66.7" rx="35.0821" ry="19.1502"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="558.882" y="70.6">
+      <tspan x="558.882" y="70.6">C02</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="480.5" y1="66.7" x2="515.182" y2="66.7"/>
+    <polygon style="fill: #000000" points="522.682,66.7 512.682,71.7 515.182,66.7 512.682,61.7 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" points="522.682,66.7 512.682,71.7 515.182,66.7 512.682,61.7 "/>
+  </g>
+  <text font-size="12.8" style="fill: #00ff00;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="884.3" y="197.6">
+    <tspan x="884.3" y="197.6">Wood</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #0000ff;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="722.3" y="202.6">
+    <tspan x="722.3" y="202.6">1 year</tspan>
+  </text>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke-dasharray: 4; stroke: #000000" x1="103" y1="247" x2="124.382" y2="247"/>
+    <polygon style="fill: #000000" points="131.882,247 121.882,252 124.382,247 121.882,242 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" points="131.882,247 121.882,252 124.382,247 121.882,242 "/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="147.3" y="251.6">
+    <tspan x="147.3" y="251.6">Dynamic Exchange</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #0000ff;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="324.9" y="229.6">
+    <tspan x="324.9" y="229.6">spread over 60 years</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #0000ff;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="876.9" y="218.6">
+    <tspan x="876.9" y="218.6">24 months</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #0000ff;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="973.9" y="155.6">
+    <tspan x="973.9" y="155.6">100 years</tspan>
+  </text>
+  <g>
+    <ellipse style="fill: #ffffff" cx="331.782" cy="122.35" rx="35.0821" ry="19.1502"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" cx="331.782" cy="122.35" rx="35.0821" ry="19.1502"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="331.782" y="126.25">
+      <tspan x="331.782" y="126.25">C02</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="384.95" y1="146.7" x2="370.858" y2="135.144"/>
+    <polygon style="fill: #000000" points="365.059,130.388 375.961,132.863 370.858,135.144 369.62,140.595 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" points="365.059,130.388 375.961,132.863 370.858,135.144 369.62,140.595 "/>
+  </g>
+</svg>
