@@ -5,7 +5,7 @@ import pickle
 from .metrics import AGTP,RadiativeForcing
 import numpy as np
 from ..dynamic_ia_methods import DynamicIAMethod
-from bw2data import config, Database
+from bw2data import config, Database, databases
 import itertools
 import os
 
@@ -51,6 +51,18 @@ def _create_constants():
     
     #save to pickle
     pickle.dump(constants, open(CONSTANTS_FILEPATH, "wb" ) )
+    
+    
+def _register_static_forest_biosphere():
+    db = Database("static_forest") 
+    db.write(
+    {('static_forest', 'C_biogenic'): {
+     # ~#{'categories': ('water','ground-'), 
+      'code': 'C_biogenic', 
+      'database': 'Biogenic Carbon dioxide from forest regrowth', 
+      'name': 'C biogenic from forest regrowth', 
+      'type': 'emission',
+      'unit': 'kilogram'}})
 
 def create_climate_methods(overwrite_constants=False):
     
@@ -67,6 +79,9 @@ def create_climate_methods(overwrite_constants=False):
     #first we create the constants
     if not os.path.isfile(CONSTANTS_FILEPATH) or overwrite_constants:
         const=_create_constants()
+    #we register our biosphere flow for forest
+    if 'static_forest' not in databases.list:
+        _register_static_forest_biosphere()
     
     bio = Database(config.biosphere)
     
