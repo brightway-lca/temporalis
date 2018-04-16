@@ -11,7 +11,7 @@ __all__ = [
     'MultiDynamicLCA'
 ]
 
-__version__ = (1, 0, 1, "RC1")
+__version__ = (1, 0, 1)
 
 
 from bw2data import config
