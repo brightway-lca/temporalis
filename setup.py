@@ -3,7 +3,7 @@ import io
 
 setup(
     name='bw2temporalis',
-    version="1.0.1.rc1",
+    version="1.0.1",
     packages=[
         "bw2temporalis",
         "bw2temporalis.tests",
