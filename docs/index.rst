@@ -1,6 +1,22 @@
 Temporalis: an open source software for dynamic LCA
 ***************************************************
 
+.. image:: https://ci.appveyor.com/api/projects/status/bfyb3bs48fnkful3?svg=true
+    :target: https://ci.appveyor.com/project/cardosan78214/brightway2-temporalis
+    :alt: bw2temporalis appveyor build status
+
+.. image:: https://coveralls.io/repos/bitbucket/cardosan/brightway2-temporalis/badge.svg?branch=default
+    :target: https://coveralls.io/bitbucket/cardosan/brightway2-temporalis?branch=default
+    :alt: Test coverage report
+    
+.. image:: https://readthedocs.org/projects/temporalis/badge/?version=latest
+    :target: http://temporalis.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
+
+.. image:: http://joss.theoj.org/papers/108a56e9f836889147df096754d4a3e7/status.svg
+    :target: http://joss.theoj.org/papers/108a56e9f836889147df096754d4a3e7
+    :alt: JOSS link
+
 An open source library for the `Brightway2 LCA calculation framework <http://brightwaylca.org/>`_ that allows for a specific kind of dynamic life cycle assessments. 
 
 `Source code is available on bitbucket <https://bitbucket.org/cardosan/brightway2-temporalis>`_, and `documentation is available on read the docs <http://temporalis.readthedocs.io/en/latest/>`_.
@@ -100,4 +116,5 @@ Table of contents
    formats
    issues
    gotcha
+   changes
    technical
