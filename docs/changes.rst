@@ -1,7 +1,16 @@
 Changelog
 *********
 
-1.0.0 (2018-02-XX)
+1.0.1 (2018-04-17)
+==================
+
+* Fixed bug in characterize by flow and process
+* Improved documentation and notebook
+* Climate constants are now serialized
+* Now also exchanges with 0 sum are correctly handled
+* Temporalis accepted on JOSS with DOI:`10.21105/joss.00612 <http://joss.theoj.org/papers/108a56e9f836889147df096754d4a3e7>`_
+
+1.0.0 (2018-03-06)
 ==================
 
 * Added ``MultiDynamicLCA()``.
@@ -12,6 +21,7 @@ Changelog
 * ``TemporalDistribution`` uses numpy datetimes.
 * Included Continuous Integration
 * Several bugfixes
+* Development moved to https://bitbucket.org/cardosan/brightway2-temporalis
 
 
 0.6.1 (2014-XX-XX)

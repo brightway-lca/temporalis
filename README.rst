@@ -10,6 +10,10 @@
     :target: http://temporalis.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
+.. image:: http://joss.theoj.org/papers/108a56e9f836889147df096754d4a3e7/status.svg
+    :target: http://joss.theoj.org/papers/108a56e9f836889147df096754d4a3e7
+    :alt: JOSS link
+
 Temporalis
 **********
 
