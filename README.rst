@@ -17,7 +17,7 @@
 Temporalis
 **********
 
-**Deprecated and archived: Please use the new `bw_temporalis <https://github.com/brightway-lca/bw_temporalis) library instead>`__**
+**Deprecated and archived: Please use the new `bw_temporalis <https://github.com/brightway-lca/bw_temporalis>`_ library instead**
 
 This package provides a dynamic (i.e. varying in time) LCA calculations package for the `Brightway2 life cycle assessment framework <https://brightwaylca.org>`_. 
 
