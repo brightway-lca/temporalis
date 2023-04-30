@@ -14,10 +14,10 @@
     :target: http://joss.theoj.org/papers/108a56e9f836889147df096754d4a3e7
     :alt: JOSS link
 
-**Deprecated: Please use the new [bw_temporalis](https://github.com/brightway-lca/bw_temporalis) library instead**
-
 Temporalis
 **********
+
+**Deprecated and archived: Please use the new `bw_temporalis <https://github.com/brightway-lca/bw_temporalis) library instead>`__**
 
 This package provides a dynamic (i.e. varying in time) LCA calculations package for the `Brightway2 life cycle assessment framework <https://brightwaylca.org>`_. 
 
